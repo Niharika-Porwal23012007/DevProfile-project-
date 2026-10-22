@@ -1,0 +1,17 @@
+{
+  "name": "devprofile-project",
+  "version": "1.0.0",
+  "description": "DevProfile: Unified student developer analytics, streak tracker, weakness analyzer, AI daily planner, and LinkedIn draft generator.",
+  "scripts": {
+    "dev": "npm run dev:all",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:all": "npx concurrently -k -p \"[{name}]\" -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build": "cd backend && npm run build && cd ../frontend && npm run build && cd ../extension && npm run compile",
+    "test": "cd backend && npm test",
+    "seed": "cd backend && npm run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
