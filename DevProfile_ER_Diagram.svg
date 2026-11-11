@@ -1,0 +1,447 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1350" width="2400" height="1350" style="background:#f8fafc; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <filter id="cardShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+
+    <!-- Crow's foot markers -->
+    <marker id="crow-many" viewBox="0 0 16 16" refX="14" refY="8" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M 0 2 L 14 8 L 0 14 M 6 2 L 6 14" fill="none" stroke="#334155" stroke-width="2"/>
+    </marker>
+    <marker id="one-and-only" viewBox="0 0 16 16" refX="2" refY="8" markerWidth="14" markerHeight="14" orient="auto">
+      <line x1="6" y1="2" x2="6" y2="14" stroke="#334155" stroke-width="2.5"/>
+      <line x1="12" y1="2" x2="12" y2="14" stroke="#334155" stroke-width="2.5"/>
+    </marker>
+    <marker id="crow-blue" viewBox="0 0 16 16" refX="14" refY="8" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M 0 2 L 14 8 L 0 14 M 6 2 L 6 14" fill="none" stroke="#2563eb" stroke-width="2"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="2400" height="1350" fill="#f8fafc"/>
+
+  <!-- Presentation Header Banner -->
+  <rect x="50" y="25" width="2300" height="95" rx="14" fill="#ffffff" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="85" y="65" font-size="26" font-weight="800" fill="#0f172a">DevProfile — Logical Entity-Relationship Diagram (ERD)</text>
+  <text x="85" y="96" font-size="14" font-weight="500" fill="#64748b">Normalized 3NF Domain Data Model • 8 Core Business Entities • Crow's Foot Relational Notation (Zero Repetitive Plumbing)</text>
+
+  <!-- Legend Badges on Header Right -->
+  <g transform="translate(1420, 40)">
+    <rect x="0" y="0" width="900" height="65" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+    
+    <!-- PK Badge -->
+    <rect x="20" y="14" width="32" height="18" rx="4" fill="#fef08a" stroke="#ca8a04"/>
+    <text x="36" y="27" text-anchor="middle" font-size="11" font-weight="800" fill="#854d0e">PK</text>
+    <text x="60" y="28" font-size="12" font-weight="600" fill="#1e293b">Primary Key</text>
+
+    <!-- FK Badge -->
+    <rect x="170" y="14" width="32" height="18" rx="4" fill="#ccfbf1" stroke="#0d9488"/>
+    <text x="186" y="27" text-anchor="middle" font-size="11" font-weight="800" fill="#0f766e">FK</text>
+    <text x="210" y="28" font-size="12" font-weight="600" fill="#1e293b">Foreign Key</text>
+
+    <!-- Crow's foot legend -->
+    <line x1="330" y1="23" x2="380" y2="23" stroke="#334155" stroke-width="2" marker-start="url(#one-and-only)" marker-end="url(#crow-many)"/>
+    <text x="390" y="28" font-size="12" font-weight="600" fill="#1e293b">1 to Many (1 : N) Relationship</text>
+
+    <text x="20" y="50" font-size="11" font-weight="600" fill="#475569">Logical Schema: Operational sync logs &amp; ephemeral 90-day timer buffers abstract into storage layer</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- RELATIONSHIP LINES (Rendered below entity cards)                -->
+  <!-- ============================================================== -->
+
+  <!-- 1. USERS -> GOALS (1 : N) -->
+  <line x1="880" y1="280" x2="780" y2="280" stroke="#334155" stroke-width="2.5" marker-start="url(#one-and-only)" marker-end="url(#crow-many)"/>
+  <rect x="795" y="255" width="70" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="800" y="269" font-size="11" font-weight="700" fill="#1e293b">1 : N targets</text>
+
+  <!-- 2. USERS -> DAILY_SCORES (1 : N) -->
+  <line x1="1520" y1="280" x2="1620" y2="280" stroke="#334155" stroke-width="2.5" marker-start="url(#one-and-only)" marker-end="url(#crow-many)"/>
+  <rect x="1530" y="255" width="80" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="1535" y="269" font-size="11" font-weight="700" fill="#1e293b">1 : N scores</text>
+
+  <!-- 3. USERS -> GITHUB_REPOS (1 : N) -->
+  <path d="M 980 470 C 980 540, 780 540, 780 560" fill="none" stroke="#334155" stroke-width="2.5" marker-start="url(#one-and-only)" marker-end="url(#crow-many)"/>
+  <rect x="800" y="525" width="85" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="805" y="539" font-size="11" font-weight="700" fill="#1e293b">1 : N owns</text>
+
+  <!-- 4. USERS -> LEETCODE_SOLVED_PROBLEMS (1 : N) -->
+  <line x1="1200" y1="470" x2="1200" y2="550" stroke="#334155" stroke-width="2.5" marker-start="url(#one-and-only)" marker-end="url(#crow-many)"/>
+  <rect x="1208" y="500" width="85" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="1213" y="514" font-size="11" font-weight="700" fill="#1e293b">1 : N solves</text>
+
+  <!-- 5. USERS -> SPACED_REVIEWS (1 : N) -->
+  <path d="M 1420 470 C 1420 540, 1620 540, 1620 560" fill="none" stroke="#334155" stroke-width="2.5" marker-start="url(#one-and-only)" marker-end="url(#crow-many)"/>
+  <rect x="1495" y="525" width="85" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="1500" y="539" font-size="11" font-weight="700" fill="#1e293b">1 : N reviews</text>
+
+  <!-- 6. LEETCODE_SOLVED_PROBLEMS -> SPACED_REVIEWS (problem_slug FK) -->
+  <line x1="1520" y1="710" x2="1620" y2="710" stroke="#2563eb" stroke-width="2.5" marker-start="url(#one-and-only)" marker-end="url(#crow-blue)"/>
+  <rect x="1530" y="685" width="80" height="20" rx="4" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="1535" y="699" font-size="11" font-weight="700" fill="#1d4ed8">triggers</text>
+
+  <!-- 7. USERS -> DAILY_PLANS (1 : N) -->
+  <path d="M 1060 470 C 1060 750, 750 780, 750 930" fill="none" stroke="#334155" stroke-width="2.5" marker-start="url(#one-and-only)" marker-end="url(#crow-many)"/>
+  <rect x="760" y="875" width="85" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="765" y="889" font-size="11" font-weight="700" fill="#1e293b">1 : N plans</text>
+
+  <!-- 8. USERS -> GENERATED_POSTS (1 : N) -->
+  <path d="M 1340 470 C 1340 750, 1640 780, 1640 930" fill="none" stroke="#334155" stroke-width="2.5" marker-start="url(#one-and-only)" marker-end="url(#crow-many)"/>
+  <rect x="1550" y="875" width="85" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="1555" y="889" font-size="11" font-weight="700" fill="#1e293b">1 : N drafts</text>
+
+
+  <!-- ============================================================== -->
+  <!-- ENTITY 1: USERS (Center-Top Core Hub)                          -->
+  <!-- ============================================================== -->
+  <g transform="translate(880, 150)" filter="url(#cardShadow)">
+    <rect width="640" height="320" rx="10" fill="#ffffff" stroke="#1e40af" stroke-width="2"/>
+    <rect width="640" height="48" rx="10" fill="#1e40af"/>
+    <rect y="38" width="640" height="10" fill="#1e40af"/>
+    <text x="320" y="32" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff">USERS</text>
+    
+    <!-- Table Body -->
+    <rect y="48" width="640" height="272" fill="#ffffff" rx="0"/>
+    <g transform="translate(25, 75)" font-family="ui-monospace, monospace" font-size="13">
+      <!-- Row 1 -->
+      <rect x="0" y="-12" width="28" height="16" rx="3" fill="#fef08a" stroke="#ca8a04"/>
+      <text x="14" y="0" text-anchor="middle" font-size="10" font-weight="800" fill="#854d0e">PK</text>
+      <text x="40" y="0" font-weight="700" fill="#0f172a">id</text>
+      <text x="460" y="0" fill="#64748b">TEXT (UUID)</text>
+      <line x1="0" y1="12" x2="590" y2="12" stroke="#f1f5f9"/>
+
+      <!-- Row 2 -->
+      <text x="40" y="28" font-weight="600" fill="#0f172a">name</text>
+      <text x="460" y="28" fill="#64748b">TEXT</text>
+      <line x1="0" y1="40" x2="590" y2="40" stroke="#f1f5f9"/>
+
+      <!-- Row 3 -->
+      <text x="40" y="56" font-weight="600" fill="#0f172a">email</text>
+      <text x="460" y="56" fill="#64748b">TEXT (UNIQUE)</text>
+      <line x1="0" y1="68" x2="590" y2="68" stroke="#f1f5f9"/>
+
+      <!-- Row 4 -->
+      <text x="40" y="84" font-weight="600" fill="#0f172a">github_username</text>
+      <text x="460" y="84" fill="#64748b">TEXT</text>
+      <line x1="0" y1="96" x2="590" y2="96" stroke="#f1f5f9"/>
+
+      <!-- Row 5 -->
+      <text x="40" y="112" font-weight="600" fill="#0f172a">leetcode_username</text>
+      <text x="460" y="112" fill="#64748b">TEXT</text>
+      <line x1="0" y1="124" x2="590" y2="124" stroke="#f1f5f9"/>
+
+      <!-- Row 6 -->
+      <text x="40" y="140" font-weight="600" fill="#0f172a">public_slug</text>
+      <text x="460" y="140" fill="#64748b">TEXT (UNIQUE)</text>
+      <line x1="0" y1="152" x2="590" y2="152" stroke="#f1f5f9"/>
+
+      <!-- Row 7 -->
+      <text x="40" y="168" font-weight="600" fill="#0f172a">is_public</text>
+      <text x="460" y="168" fill="#64748b">INTEGER (0 or 1)</text>
+      <line x1="0" y1="180" x2="590" y2="180" stroke="#f1f5f9"/>
+
+      <!-- Row 8 -->
+      <text x="40" y="196" font-weight="600" fill="#475569">api_key_hash</text>
+      <text x="460" y="196" fill="#64748b">TEXT (SHA-256)</text>
+    </g>
+  </g>
+
+
+  <!-- ============================================================== -->
+  <!-- ENTITY 2: GOALS (Top-Left)                                     -->
+  <!-- ============================================================== -->
+  <g transform="translate(100, 160)" filter="url(#cardShadow)">
+    <rect width="680" height="260" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect width="680" height="44" rx="10" fill="#334155"/>
+    <rect y="36" width="680" height="8" fill="#334155"/>
+    <text x="340" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">GOALS</text>
+
+    <g transform="translate(25, 70)" font-family="ui-monospace, monospace" font-size="13">
+      <!-- PK -->
+      <rect x="0" y="-12" width="28" height="16" rx="3" fill="#fef08a" stroke="#ca8a04"/>
+      <text x="14" y="0" text-anchor="middle" font-size="10" font-weight="800" fill="#854d0e">PK</text>
+      <text x="40" y="0" font-weight="700" fill="#0f172a">id</text>
+      <text x="480" y="0" fill="#64748b">TEXT (UUID)</text>
+      <line x1="0" y1="12" x2="630" y2="12" stroke="#f1f5f9"/>
+
+      <!-- FK -->
+      <rect x="0" y="16" width="28" height="16" rx="3" fill="#ccfbf1" stroke="#0d9488"/>
+      <text x="14" y="28" text-anchor="middle" font-size="10" font-weight="800" fill="#0f766e">FK</text>
+      <text x="40" y="28" font-weight="700" fill="#0f172a">user_id</text>
+      <text x="480" y="28" fill="#64748b">TEXT → USERS(id)</text>
+      <line x1="0" y1="40" x2="630" y2="40" stroke="#f1f5f9"/>
+
+      <text x="40" y="56" font-weight="600" fill="#0f172a">type</text>
+      <text x="480" y="56" fill="#64748b">TEXT ('leetcode'|'github'|'time')</text>
+      <line x1="0" y1="68" x2="630" y2="68" stroke="#f1f5f9"/>
+
+      <text x="40" y="84" font-weight="600" fill="#0f172a">target_value</text>
+      <text x="480" y="84" fill="#64748b">REAL (e.g. 3 solves / day)</text>
+      <line x1="0" y1="96" x2="630" y2="96" stroke="#f1f5f9"/>
+
+      <text x="40" y="112" font-weight="600" fill="#0f172a">period</text>
+      <text x="480" y="112" fill="#64748b">TEXT ('daily'|'weekly')</text>
+    </g>
+  </g>
+
+
+  <!-- ============================================================== -->
+  <!-- ENTITY 3: DAILY_SCORES (Top-Right)                             -->
+  <!-- ============================================================== -->
+  <g transform="translate(1620, 160)" filter="url(#cardShadow)">
+    <rect width="680" height="260" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect width="680" height="44" rx="10" fill="#1e3a8a"/>
+    <rect y="36" width="680" height="8" fill="#1e3a8a"/>
+    <text x="340" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">DAILY_SCORES</text>
+
+    <g transform="translate(25, 70)" font-family="ui-monospace, monospace" font-size="13">
+      <!-- PK -->
+      <rect x="0" y="-12" width="28" height="16" rx="3" fill="#fef08a" stroke="#ca8a04"/>
+      <text x="14" y="0" text-anchor="middle" font-size="10" font-weight="800" fill="#854d0e">PK</text>
+      <text x="40" y="0" font-weight="700" fill="#0f172a">id</text>
+      <text x="480" y="0" fill="#64748b">TEXT (UUID)</text>
+      <line x1="0" y1="12" x2="630" y2="12" stroke="#f1f5f9"/>
+
+      <!-- FK -->
+      <rect x="0" y="16" width="28" height="16" rx="3" fill="#ccfbf1" stroke="#0d9488"/>
+      <text x="14" y="28" text-anchor="middle" font-size="10" font-weight="800" fill="#0f766e">FK</text>
+      <text x="40" y="28" font-weight="700" fill="#0f172a">user_id</text>
+      <text x="480" y="28" fill="#64748b">TEXT → USERS(id)</text>
+      <line x1="0" y1="40" x2="630" y2="40" stroke="#f1f5f9"/>
+
+      <text x="40" y="56" font-weight="600" fill="#0f172a">date</text>
+      <text x="480" y="56" fill="#64748b">TEXT (YYYY-MM-DD)</text>
+      <line x1="0" y1="68" x2="630" y2="68" stroke="#f1f5f9"/>
+
+      <text x="40" y="84" font-weight="600" fill="#0f172a">consistency_score</text>
+      <text x="480" y="84" fill="#64748b">REAL (0..100 max)</text>
+      <line x1="0" y1="96" x2="630" y2="96" stroke="#f1f5f9"/>
+
+      <text x="40" y="112" font-weight="600" fill="#0f172a">leetcode_pts | github_pts | coding_pts</text>
+      <text x="480" y="112" fill="#64748b">REAL (40 + 30 + 30)</text>
+    </g>
+  </g>
+
+
+  <!-- ============================================================== -->
+  <!-- ENTITY 4: GITHUB_REPOS (Mid-Left)                              -->
+  <!-- ============================================================== -->
+  <g transform="translate(100, 520)" filter="url(#cardShadow)">
+    <rect width="680" height="320" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect width="680" height="44" rx="10" fill="#334155"/>
+    <rect y="36" width="680" height="8" fill="#334155"/>
+    <text x="340" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">GITHUB_REPOS</text>
+
+    <g transform="translate(25, 70)" font-family="ui-monospace, monospace" font-size="13">
+      <!-- PK -->
+      <rect x="0" y="-12" width="28" height="16" rx="3" fill="#fef08a" stroke="#ca8a04"/>
+      <text x="14" y="0" text-anchor="middle" font-size="10" font-weight="800" fill="#854d0e">PK</text>
+      <text x="40" y="0" font-weight="700" fill="#0f172a">id</text>
+      <text x="480" y="0" fill="#64748b">TEXT (UUID)</text>
+      <line x1="0" y1="12" x2="630" y2="12" stroke="#f1f5f9"/>
+
+      <!-- FK -->
+      <rect x="0" y="16" width="28" height="16" rx="3" fill="#ccfbf1" stroke="#0d9488"/>
+      <text x="14" y="28" text-anchor="middle" font-size="10" font-weight="800" fill="#0f766e">FK</text>
+      <text x="40" y="28" font-weight="700" fill="#0f172a">user_id</text>
+      <text x="480" y="28" fill="#64748b">TEXT → USERS(id)</text>
+      <line x1="0" y1="40" x2="630" y2="40" stroke="#f1f5f9"/>
+
+      <text x="40" y="56" font-weight="600" fill="#0f172a">repo_name</text>
+      <text x="480" y="56" fill="#64748b">TEXT</text>
+      <line x1="0" y1="68" x2="630" y2="68" stroke="#f1f5f9"/>
+
+      <text x="40" y="84" font-weight="600" fill="#0f172a">url</text>
+      <text x="480" y="84" fill="#64748b">TEXT</text>
+      <line x1="0" y1="96" x2="630" y2="96" stroke="#f1f5f9"/>
+
+      <text x="40" y="112" font-weight="600" fill="#0f172a">primary_language</text>
+      <text x="480" y="112" fill="#64748b">TEXT (e.g. 'TypeScript')</text>
+      <line x1="0" y1="124" x2="630" y2="124" stroke="#f1f5f9"/>
+
+      <text x="40" y="140" font-weight="600" fill="#0f172a">stars</text>
+      <text x="480" y="140" fill="#64748b">INTEGER</text>
+      <line x1="0" y1="152" x2="630" y2="152" stroke="#f1f5f9"/>
+
+      <text x="40" y="168" font-weight="600" fill="#0f172a">pushed_at</text>
+      <text x="480" y="168" fill="#64748b">TEXT (ISO 8601)</text>
+    </g>
+  </g>
+
+
+  <!-- ============================================================== -->
+  <!-- ENTITY 5: LEETCODE_SOLVED_PROBLEMS (Mid-Center)               -->
+  <!-- ============================================================== -->
+  <g transform="translate(880, 550)" filter="url(#cardShadow)">
+    <rect width="640" height="320" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect width="640" height="44" rx="10" fill="#ea580c"/>
+    <rect y="36" width="640" height="8" fill="#ea580c"/>
+    <text x="320" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">LEETCODE_SOLVED_PROBLEMS</text>
+
+    <g transform="translate(25, 70)" font-family="ui-monospace, monospace" font-size="13">
+      <!-- PK -->
+      <rect x="0" y="-12" width="28" height="16" rx="3" fill="#fef08a" stroke="#ca8a04"/>
+      <text x="14" y="0" text-anchor="middle" font-size="10" font-weight="800" fill="#854d0e">PK</text>
+      <text x="40" y="0" font-weight="700" fill="#0f172a">id</text>
+      <text x="460" y="0" fill="#64748b">TEXT (UUID)</text>
+      <line x1="0" y1="12" x2="590" y2="12" stroke="#f1f5f9"/>
+
+      <!-- FK -->
+      <rect x="0" y="16" width="28" height="16" rx="3" fill="#ccfbf1" stroke="#0d9488"/>
+      <text x="14" y="28" text-anchor="middle" font-size="10" font-weight="800" fill="#0f766e">FK</text>
+      <text x="40" y="28" font-weight="700" fill="#0f172a">user_id</text>
+      <text x="460" y="28" fill="#64748b">TEXT → USERS(id)</text>
+      <line x1="0" y1="40" x2="590" y2="40" stroke="#f1f5f9"/>
+
+      <text x="40" y="56" font-weight="600" fill="#0f172a">slug</text>
+      <text x="460" y="56" fill="#64748b">TEXT (Problem key)</text>
+      <line x1="0" y1="68" x2="590" y2="68" stroke="#f1f5f9"/>
+
+      <text x="40" y="84" font-weight="600" fill="#0f172a">title</text>
+      <text x="460" y="84" fill="#64748b">TEXT</text>
+      <line x1="0" y1="96" x2="590" y2="96" stroke="#f1f5f9"/>
+
+      <text x="40" y="112" font-weight="600" fill="#0f172a">difficulty</text>
+      <text x="460" y="112" fill="#64748b">TEXT ('Easy'|'Med'|'Hard')</text>
+      <line x1="0" y1="124" x2="590" y2="124" stroke="#f1f5f9"/>
+
+      <text x="40" y="140" font-weight="600" fill="#0f172a">topic_tags</text>
+      <text x="460" y="140" fill="#64748b">TEXT (Comma string)</text>
+      <line x1="0" y1="152" x2="590" y2="152" stroke="#f1f5f9"/>
+
+      <text x="40" y="168" font-weight="600" fill="#0f172a">struggled</text>
+      <text x="460" y="168" fill="#64748b">INTEGER (1=Flagged)</text>
+    </g>
+  </g>
+
+
+  <!-- ============================================================== -->
+  <!-- ENTITY 6: SPACED_REVIEWS (Mid-Right)                           -->
+  <!-- ============================================================== -->
+  <g transform="translate(1620, 520)" filter="url(#cardShadow)">
+    <rect width="680" height="320" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect width="680" height="44" rx="10" fill="#059669"/>
+    <rect y="36" width="680" height="8" fill="#059669"/>
+    <text x="340" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">SPACED_REVIEWS</text>
+
+    <g transform="translate(25, 70)" font-family="ui-monospace, monospace" font-size="13">
+      <!-- PK -->
+      <rect x="0" y="-12" width="28" height="16" rx="3" fill="#fef08a" stroke="#ca8a04"/>
+      <text x="14" y="0" text-anchor="middle" font-size="10" font-weight="800" fill="#854d0e">PK</text>
+      <text x="40" y="0" font-weight="700" fill="#0f172a">id</text>
+      <text x="480" y="0" fill="#64748b">TEXT (UUID)</text>
+      <line x1="0" y1="12" x2="630" y2="12" stroke="#f1f5f9"/>
+
+      <!-- FK -->
+      <rect x="0" y="16" width="28" height="16" rx="3" fill="#ccfbf1" stroke="#0d9488"/>
+      <text x="14" y="28" text-anchor="middle" font-size="10" font-weight="800" fill="#0f766e">FK</text>
+      <text x="40" y="28" font-weight="700" fill="#0f172a">user_id</text>
+      <text x="480" y="28" fill="#64748b">TEXT → USERS(id)</text>
+      <line x1="0" y1="40" x2="630" y2="40" stroke="#f1f5f9"/>
+
+      <!-- FK 2 -->
+      <rect x="0" y="44" width="28" height="16" rx="3" fill="#ccfbf1" stroke="#0d9488"/>
+      <text x="14" y="56" text-anchor="middle" font-size="10" font-weight="800" fill="#0f766e">FK</text>
+      <text x="40" y="56" font-weight="700" fill="#0f172a">problem_slug</text>
+      <text x="480" y="56" fill="#64748b">TEXT → SOLVED_PROBLEMS</text>
+      <line x1="0" y1="68" x2="630" y2="68" stroke="#f1f5f9"/>
+
+      <text x="40" y="84" font-weight="600" fill="#0f172a">due_date</text>
+      <text x="480" y="84" fill="#64748b">TEXT (YYYY-MM-DD)</text>
+      <line x1="0" y1="96" x2="630" y2="96" stroke="#f1f5f9"/>
+
+      <text x="40" y="112" font-weight="600" fill="#0f172a">interval_days</text>
+      <text x="480" y="112" fill="#64748b">INTEGER (3, 7, 21, 30)</text>
+      <line x1="0" y1="124" x2="630" y2="124" stroke="#f1f5f9"/>
+
+      <text x="40" y="140" font-weight="600" fill="#0f172a">done_at</text>
+      <text x="480" y="140" fill="#64748b">TEXT (NULL if pending)</text>
+    </g>
+  </g>
+
+
+  <!-- ============================================================== -->
+  <!-- ENTITY 7: DAILY_PLANS (Bottom-Left)                            -->
+  <!-- ============================================================== -->
+  <g transform="translate(300, 930)" filter="url(#cardShadow)">
+    <rect width="840" height="270" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect width="840" height="44" rx="10" fill="#4338ca"/>
+    <rect y="36" width="840" height="8" fill="#4338ca"/>
+    <text x="420" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">DAILY_PLANS</text>
+
+    <g transform="translate(25, 70)" font-family="ui-monospace, monospace" font-size="13">
+      <!-- PK -->
+      <rect x="0" y="-12" width="28" height="16" rx="3" fill="#fef08a" stroke="#ca8a04"/>
+      <text x="14" y="0" text-anchor="middle" font-size="10" font-weight="800" fill="#854d0e">PK</text>
+      <text x="40" y="0" font-weight="700" fill="#0f172a">id</text>
+      <text x="540" y="0" fill="#64748b">TEXT (UUID)</text>
+      <line x1="0" y1="12" x2="790" y2="12" stroke="#f1f5f9"/>
+
+      <!-- FK -->
+      <rect x="0" y="16" width="28" height="16" rx="3" fill="#ccfbf1" stroke="#0d9488"/>
+      <text x="14" y="28" text-anchor="middle" font-size="10" font-weight="800" fill="#0f766e">FK</text>
+      <text x="40" y="28" font-weight="700" fill="#0f172a">user_id</text>
+      <text x="540" y="28" fill="#64748b">TEXT → USERS(id)</text>
+      <line x1="0" y1="40" x2="790" y2="40" stroke="#f1f5f9"/>
+
+      <text x="40" y="56" font-weight="600" fill="#0f172a">date</text>
+      <text x="540" y="56" fill="#64748b">TEXT (YYYY-MM-DD)</text>
+      <line x1="0" y1="68" x2="790" y2="68" stroke="#f1f5f9"/>
+
+      <text x="40" y="84" font-weight="600" fill="#0f172a">plan_json</text>
+      <text x="540" y="84" fill="#64748b">TEXT (Deficit + Review + Repo task JSON)</text>
+      <line x1="0" y1="96" x2="790" y2="96" stroke="#f1f5f9"/>
+
+      <text x="40" y="112" font-weight="600" fill="#0f172a">followed_json</text>
+      <text x="540" y="112" fill="#64748b">TEXT (Completed task boolean flags)</text>
+    </g>
+  </g>
+
+
+  <!-- ============================================================== -->
+  <!-- ENTITY 8: GENERATED_POSTS (Bottom-Right)                       -->
+  <!-- ============================================================== -->
+  <g transform="translate(1260, 930)" filter="url(#cardShadow)">
+    <rect width="840" height="270" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect width="840" height="44" rx="10" fill="#0284c7"/>
+    <rect y="36" width="840" height="8" fill="#0284c7"/>
+    <text x="420" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">GENERATED_POSTS</text>
+
+    <g transform="translate(25, 70)" font-family="ui-monospace, monospace" font-size="13">
+      <!-- PK -->
+      <rect x="0" y="-12" width="28" height="16" rx="3" fill="#fef08a" stroke="#ca8a04"/>
+      <text x="14" y="0" text-anchor="middle" font-size="10" font-weight="800" fill="#854d0e">PK</text>
+      <text x="40" y="0" font-weight="700" fill="#0f172a">id</text>
+      <text x="540" y="0" fill="#64748b">TEXT (UUID)</text>
+      <line x1="0" y1="12" x2="790" y2="12" stroke="#f1f5f9"/>
+
+      <!-- FK -->
+      <rect x="0" y="16" width="28" height="16" rx="3" fill="#ccfbf1" stroke="#0d9488"/>
+      <text x="14" y="28" text-anchor="middle" font-size="10" font-weight="800" fill="#0f766e">FK</text>
+      <text x="40" y="28" font-weight="700" fill="#0f172a">user_id</text>
+      <text x="540" y="28" fill="#64748b">TEXT → USERS(id)</text>
+      <line x1="0" y1="40" x2="790" y2="40" stroke="#f1f5f9"/>
+
+      <text x="40" y="56" font-weight="600" fill="#0f172a">type</text>
+      <text x="540" y="56" fill="#64748b">TEXT ('weekly_recap'|'project_milestone')</text>
+      <line x1="0" y1="68" x2="790" y2="68" stroke="#f1f5f9"/>
+
+      <text x="40" y="84" font-weight="600" fill="#0f172a">text</text>
+      <text x="540" y="84" fill="#64748b">TEXT (Anti-fabrication verified body)</text>
+      <line x1="0" y1="96" x2="790" y2="96" stroke="#f1f5f9"/>
+
+      <text x="40" y="112" font-weight="600" fill="#0f172a">posted</text>
+      <text x="540" y="112" fill="#64748b">INTEGER (0=Draft, 1=Published)</text>
+    </g>
+  </g>
+
+  <!-- Presentation Footer Info -->
+  <g transform="translate(50, 1300)">
+    <rect width="2300" height="30" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+    <text x="25" y="20" font-size="12" font-weight="700" fill="#475569">Relational Domain ERD: 8 Core Business Entities • 3NF Normalization • Standard Crow's Foot Cardinality • Academic Presentation Ready</text>
+    <text x="2275" y="20" text-anchor="end" font-size="12" font-weight="600" fill="#64748b">DevProfile Database Architecture</text>
+  </g>
+</svg>
