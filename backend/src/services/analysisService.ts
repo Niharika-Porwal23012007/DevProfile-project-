@@ -129,48 +129,77 @@ export class AnalysisService {
 
   /**
    * 6.2 Weakness Analyzer:
-   * Compares solved counts per topic with average across topics.
-   * Topics below average or with low medium/hard share ranked weakest.
+   * Compares solved counts per topic with average across topics and evaluates difficulty depth.
+   * Topics with volume deficits, low medium/hard share, or high struggle rates are ranked weakest.
    */
-  static analyzeWeaknesses(topicData: { [topic: string]: { total: number; medium: number; hard: number; easy: number } }): {
+  static analyzeWeaknesses(topicData: { [topic: string]: { total: number; medium: number; hard: number; easy: number; struggled?: number } }): {
     weakestTopics: WeaknessTopic[];
     topicStats: WeaknessTopic[];
     averageSolved: number;
   } {
-    const topics = Object.keys(topicData);
+    let topics = Object.keys(topicData || {});
+
+    // Foundational core DSA curriculum to establish baseline if user has no data
+    const foundational = [
+      'Dynamic Programming',
+      'Graphs',
+      'Binary Trees',
+      'Arrays & Hashing',
+      'Two Pointers',
+      'Sliding Window',
+      'Binary Search',
+      'Heap / Priority Queue',
+      'Backtracking',
+      'Greedy'
+    ];
+
     if (topics.length === 0) {
-      return { weakestTopics: [], topicStats: [], averageSolved: 0 };
+      const emptyTopicData: typeof topicData = {};
+      for (const t of foundational) {
+        emptyTopicData[t] = { total: 0, medium: 0, hard: 0, easy: 0, struggled: 0 };
+      }
+      topicData = emptyTopicData;
+      topics = Object.keys(topicData);
     }
 
-    const totalAllSolves = topics.reduce((acc, t) => acc + topicData[t].total, 0);
-    const averageSolved = totalAllSolves / topics.length;
+    const totalAllSolves = topics.reduce((acc, t) => acc + (topicData[t]?.total || 0), 0);
+    const averageSolved = topics.length > 0 ? totalAllSolves / topics.length : 0;
 
     const list: WeaknessTopic[] = topics.map(topic => {
-      const stat = topicData[topic];
-      const advCount = stat.medium + stat.hard;
+      const stat = topicData[topic] || { total: 0, medium: 0, hard: 0, easy: 0, struggled: 0 };
+      const advCount = (stat.medium || 0) + (stat.hard || 0);
       const advancedRatio = stat.total > 0 ? advCount / stat.total : 0;
-
-      // Weakness formula:
-      // Volume deficit: (averageSolved - stat.total) normalized
-      // Difficulty deficit: (1 - advancedRatio)
       const volumeDeficit = Math.max(0, averageSolved - stat.total);
-      const weaknessScore = Math.round((volumeDeficit * 1.5 + (1 - advancedRatio) * 10) * 10) / 10;
+
+      // Struggle penalty: if student struggled on problems in this topic
+      const struggledCount = stat.struggled || 0;
+      const strugglePenalty = stat.total > 0 ? (struggledCount / stat.total) * 6 : 0;
+
+      // Section 6.2 Formula:
+      // weakness_score = 1.5 * volume_deficit + 10 * (1 - advanced_ratio) + strugglePenalty
+      const weaknessScore = Math.round((volumeDeficit * 1.5 + (1 - advancedRatio) * 10 + strugglePenalty) * 10) / 10;
 
       let reason = '';
-      if (stat.total < averageSolved * 0.5) {
-        reason = `Significantly under-practiced: only ${stat.total} solved vs ${Math.round(averageSolved)} average.`;
+      if (stat.total === 0) {
+        reason = `Unpracticed area: 0 problems solved in this foundational interview topic.`;
+      } else if (struggledCount > 0 && (struggledCount / stat.total) >= 0.35) {
+        reason = `High struggle rate: struggled on ${struggledCount} of ${stat.total} problem(s) (${Math.round((struggledCount / stat.total) * 100)}%).`;
+      } else if (stat.total < averageSolved * 0.5) {
+        reason = `Significantly under-practiced: only ${stat.total} solved vs ${Math.round(averageSolved)} topic average.`;
       } else if (advancedRatio < 0.3 && stat.total > 0) {
         reason = `Lacks depth: only ${Math.round(advancedRatio * 100)}% are Medium/Hard problems.`;
-      } else {
+      } else if (advancedRatio < 0.55) {
         reason = `Moderate coverage with room for harder algorithmic variations.`;
+      } else {
+        reason = `Solid mastery demonstrated with ${Math.round(advancedRatio * 100)}% Medium/Hard depth.`;
       }
 
       return {
         topic,
         totalSolved: stat.total,
-        mediumCount: stat.medium,
-        hardCount: stat.hard,
-        easyCount: stat.easy,
+        mediumCount: stat.medium || 0,
+        hardCount: stat.hard || 0,
+        easyCount: stat.easy || 0,
         advancedRatio: Math.round(advancedRatio * 100) / 100,
         weaknessScore,
         reason
@@ -185,6 +214,125 @@ export class AnalysisService {
       topicStats: list,
       averageSolved: Math.round(averageSolved * 10) / 10
     };
+  }
+
+  /**
+   * Diagnostic helper: collects comprehensive topic stats from snapshots,
+   * actual solved problem logs, problem timers, and spaced repetition struggle records.
+   */
+  static getUserTopicData(userId: string): { [topic: string]: { total: number; medium: number; hard: number; easy: number; struggled: number } } {
+    const topicMap: { [topic: string]: { total: number; medium: number; hard: number; easy: number; struggled: number } } = {};
+
+    // 1. Fetch latest snapshot with non-empty topic counts (do not strictly require sync_status = 'success')
+    try {
+      const snap = db.prepare(`
+        SELECT topic_counts_json
+        FROM leetcode_snapshots
+        WHERE user_id = ? AND topic_counts_json IS NOT NULL AND length(topic_counts_json) > 5
+        ORDER BY date DESC
+        LIMIT 1
+      `).get(userId) as any;
+
+      if (snap?.topic_counts_json) {
+        const parsed = JSON.parse(snap.topic_counts_json);
+        for (const [topic, counts] of Object.entries<any>(parsed)) {
+          topicMap[topic] = {
+            total: counts.total || 0,
+            medium: counts.medium || 0,
+            hard: counts.hard || 0,
+            easy: counts.easy || 0,
+            struggled: counts.struggled || 0
+          };
+        }
+      }
+    } catch (err) {
+      console.warn('[AnalysisService] Failed to parse snapshot topic data:', err);
+    }
+
+    // 2. Augment / seed from leetcode_solved_problems
+    try {
+      const solvedProblems = db.prepare(`
+        SELECT difficulty, topic_tags, struggled
+        FROM leetcode_solved_problems
+        WHERE user_id = ?
+      `).all(userId) as any[];
+
+      const hasSnapshotData = Object.keys(topicMap).length > 0;
+
+      for (const p of solvedProblems) {
+        let tags: string[] = [];
+        try {
+          tags = JSON.parse(p.topic_tags || '[]');
+        } catch (e) {
+          tags = [p.topic_tags || 'Algorithms'];
+        }
+        if (!Array.isArray(tags) || tags.length === 0) {
+          tags = ['Algorithms'];
+        }
+
+        const diff = p.difficulty || 'Medium';
+        const isStruggled = p.struggled === 1 ? 1 : 0;
+
+        for (const tag of tags) {
+          if (!topicMap[tag]) {
+            topicMap[tag] = { total: 0, medium: 0, hard: 0, easy: 0, struggled: 0 };
+          }
+          // If no snapshot existed or this tag was not in snapshot, increment counts from solved problem records
+          if (!hasSnapshotData || topicMap[tag].total === 0) {
+            topicMap[tag].total += 1;
+            if (diff === 'Easy') topicMap[tag].easy += 1;
+            else if (diff === 'Medium') topicMap[tag].medium += 1;
+            else if (diff === 'Hard') topicMap[tag].hard += 1;
+          }
+          if (isStruggled) {
+            topicMap[tag].struggled = (topicMap[tag].struggled || 0) + 1;
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[AnalysisService] Failed to augment solved problems:', err);
+    }
+
+    // 3. Augment struggle signals from problem_times (>40min or struggled flag)
+    try {
+      const times = db.prepare(`
+        SELECT pt.struggled, pt.elapsed_sec, sp.topic_tags
+        FROM problem_times pt
+        LEFT JOIN leetcode_solved_problems sp ON sp.slug = pt.slug AND sp.user_id = pt.user_id
+        WHERE pt.user_id = ? AND (pt.struggled = 1 OR pt.elapsed_sec > 2400)
+      `).all(userId) as any[];
+
+      for (const t of times) {
+        let tags: string[] = [];
+        try {
+          tags = JSON.parse(t.topic_tags || '[]');
+        } catch (e) {
+          tags = [];
+        }
+        for (const tag of tags) {
+          if (topicMap[tag]) {
+            topicMap[tag].struggled = (topicMap[tag].struggled || 0) + 1;
+          }
+        }
+      }
+    } catch (e) {}
+
+    // 4. Augment struggle signals from spaced repetition reviews
+    try {
+      const reviews = db.prepare(`
+        SELECT topic, struggle_count
+        FROM reviews
+        WHERE user_id = ? AND struggle_count > 0
+      `).all(userId) as any[];
+
+      for (const r of reviews) {
+        if (r.topic && topicMap[r.topic]) {
+          topicMap[r.topic].struggled = (topicMap[r.topic].struggled || 0) + r.struggle_count;
+        }
+      }
+    } catch (e) {}
+
+    return topicMap;
   }
 
   /**

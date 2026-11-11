@@ -157,20 +157,8 @@ dashboardRouter.get('/dashboard', requireAuth, (req: Request, res: Response) => 
 dashboardRouter.get('/insights', requireAuth, (req: Request, res: Response) => {
   const userId = req.user!.id;
 
-  // 1. Weakness Analyzer: latest LeetCode snapshot
-  const latestSnapshot = db.prepare(`
-    SELECT topic_counts_json, easy, medium, hard
-    FROM leetcode_snapshots
-    WHERE user_id = ? AND sync_status = 'success'
-    ORDER BY date DESC LIMIT 1
-  `).get(userId) as any;
-
-  let topicData: Record<string, any> = {};
-  if (latestSnapshot?.topic_counts_json) {
-    try {
-      topicData = JSON.parse(latestSnapshot.topic_counts_json);
-    } catch (e) {}
-  }
+  // 1. Weakness Analyzer: comprehensive topic data from snapshots, solved problems & struggle records
+  const topicData = AnalysisService.getUserTopicData(userId);
   const weaknessResult = AnalysisService.analyzeWeaknesses(topicData);
 
   // 2. Balance Detector: last 42 days of activity
@@ -233,10 +221,29 @@ dashboardRouter.get('/insights', requireAuth, (req: Request, res: Response) => {
   const avgScore = streakScores.length > 0 ? streakScores.reduce((a, b) => a + b.score, 0) / streakScores.length : 50;
   const commitsTotal = db.prepare('SELECT SUM(commits) as total FROM github_daily WHERE user_id = ?').get(userId) as any;
 
+  const latestSnapshot = db.prepare(`
+    SELECT easy, medium, hard
+    FROM leetcode_snapshots
+    WHERE user_id = ? AND (topic_counts_json IS NOT NULL OR (easy + medium + hard) > 0)
+    ORDER BY date DESC LIMIT 1
+  `).get(userId) as any;
+
+  let easyCount = latestSnapshot?.easy || 0;
+  let mediumCount = latestSnapshot?.medium || 0;
+  let hardCount = latestSnapshot?.hard || 0;
+
+  if (easyCount + mediumCount + hardCount === 0) {
+    for (const t of Object.values(topicData)) {
+      easyCount += t.easy || 0;
+      mediumCount += t.medium || 0;
+      hardCount += t.hard || 0;
+    }
+  }
+
   const interviewReadiness = AnalysisService.calculateInterviewReadiness({
-    easyCount: latestSnapshot?.easy || 0,
-    mediumCount: latestSnapshot?.medium || 0,
-    hardCount: latestSnapshot?.hard || 0,
+    easyCount,
+    mediumCount,
+    hardCount,
     topicsCount: Object.keys(topicData).length,
     streakDays: streak.currentStreak,
     avgConsistencyScore: avgScore,

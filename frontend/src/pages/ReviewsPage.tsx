@@ -19,7 +19,6 @@ export const ReviewsPage: React.FC = () => {
   const [upcoming, setUpcoming] = useState<ReviewItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Note editor modal/drawer state
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [noteText, setNoteText] = useState('');
   const [patternTag, setPatternTag] = useState('');
@@ -82,9 +81,9 @@ export const ReviewsPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px] text-gray-500 text-sm">
-        <div className="animate-spin mr-2 w-5 h-5 border-2 border-indigo-500 border-t-transparent rounded-full" />
-        <span>Loading spaced-repetition queue...</span>
+      <div className="flex items-center justify-center min-h-[400px] text-slate-500 dark:text-gray-400 text-sm font-medium">
+        <div className="animate-spin mr-3 w-5 h-5 border-2 border-indigo-600 border-t-transparent rounded-full" />
+        <span>Loading spaced-repetition retention queue...</span>
       </div>
     );
   }
@@ -93,11 +92,11 @@ export const ReviewsPage: React.FC = () => {
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Header */}
       <div>
-        <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-          <Brain className="w-5 h-5 text-indigo-400" />
-          <span>Spaced Repetition &amp; Problem Notes (Section 6.3)</span>
+        <h2 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+          <Brain className="w-5 h-5 text-indigo-500" />
+          <span>Spaced Repetition &amp; Problem Review Queue</span>
         </h2>
-        <p className="text-xs text-gray-400 mt-1">
+        <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">
           When problems are struggled, DevProfile automatically schedules retention reviews after 3, 7, and 21 days to prevent forgetting.
         </p>
       </div>
@@ -107,19 +106,19 @@ export const ReviewsPage: React.FC = () => {
         {/* Left 2 Cols: Queues */}
         <div className="lg:col-span-2 space-y-6">
           {/* Due Today */}
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
+          <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
                 <span>Due Today for Review ({dueToday.length})</span>
               </h3>
-              <span className="text-xs text-amber-400 font-semibold bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded">
-                Active Queue
+              <span className="text-xs text-amber-700 dark:text-amber-400 font-bold bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 px-2.5 py-0.5 rounded-full">
+                Active Retention Queue
               </span>
             </div>
 
             {dueToday.length === 0 ? (
-              <div className="p-8 text-center border border-dashed border-gray-800 rounded-xl text-gray-500 text-xs">
+              <div className="p-8 text-center border border-dashed border-slate-200 dark:border-gray-800 rounded-2xl text-slate-500 dark:text-gray-400 text-xs">
                 No problems due for review today. Great work staying on top of spaced repetition!
               </div>
             ) : (
@@ -127,16 +126,16 @@ export const ReviewsPage: React.FC = () => {
                 {dueToday.map((rev) => (
                   <div
                     key={rev.id}
-                    className="p-4 rounded-xl bg-gray-800/40 border border-gray-800 hover:border-gray-700 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                    className="p-4 rounded-2xl bg-slate-50 dark:bg-gray-800/40 border border-slate-200 dark:border-gray-800 hover:border-indigo-300 dark:hover:border-gray-700 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm"
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-sm text-white">{rev.title || rev.problem_slug}</span>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                        <span className="font-extrabold text-sm text-slate-900 dark:text-white">{rev.title || rev.problem_slug}</span>
+                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20">
                           {rev.interval_days}d interval
                         </span>
                         {rev.pattern_tag && (
-                          <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-gray-800 text-indigo-300 border border-gray-700 flex items-center gap-1">
+                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-300 border border-slate-200 dark:border-gray-700 flex items-center gap-1">
                             <Tag className="w-2.5 h-2.5" />
                             <span>{rev.pattern_tag}</span>
                           </span>
@@ -144,16 +143,16 @@ export const ReviewsPage: React.FC = () => {
                       </div>
 
                       {rev.note_text && (
-                        <p className="text-xs text-gray-400 mt-2 line-clamp-1 italic">
+                        <p className="text-xs text-slate-600 dark:text-gray-400 mt-2 line-clamp-1 italic">
                           "{rev.note_text}"
                         </p>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 shrink-0">
                       <button
                         onClick={() => handleOpenNote(rev.problem_slug)}
-                        className="p-2 text-gray-400 hover:text-indigo-400 hover:bg-gray-800 rounded-lg transition"
+                        className="p-2 text-slate-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-200 dark:hover:bg-gray-800 rounded-xl transition"
                         title="View / Edit Note"
                       >
                         <FileEdit className="w-4 h-4" />
@@ -163,7 +162,7 @@ export const ReviewsPage: React.FC = () => {
                         href={`https://leetcode.com/problems/${rev.problem_slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 text-gray-400 hover:text-indigo-400 hover:bg-gray-800 rounded-lg transition"
+                        className="p-2 text-slate-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-200 dark:hover:bg-gray-800 rounded-xl transition"
                         title="Open on LeetCode"
                       >
                         <ExternalLink className="w-4 h-4" />
@@ -171,7 +170,7 @@ export const ReviewsPage: React.FC = () => {
 
                       <button
                         onClick={() => handleDone(rev.id, true)}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1 transition"
+                        className="px-3.5 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-600/20 hover:bg-emerald-100 dark:hover:bg-emerald-600/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30 text-xs font-bold flex items-center gap-1 transition shadow-sm"
                       >
                         <CheckCircle className="w-3.5 h-3.5" />
                         <span>Solved</span>
@@ -179,7 +178,7 @@ export const ReviewsPage: React.FC = () => {
 
                       <button
                         onClick={() => handleDone(rev.id, false)}
-                        className="px-2.5 py-1.5 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 text-xs font-semibold flex items-center gap-1 transition"
+                        className="px-2.5 py-1.5 rounded-xl bg-red-50 dark:bg-red-600/20 hover:bg-red-100 dark:hover:bg-red-600/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-500/30 text-xs font-bold flex items-center gap-1 transition shadow-sm"
                         title="Failed or struggled (resets interval to 3 days)"
                       >
                         <XCircle className="w-3.5 h-3.5" />
@@ -193,9 +192,9 @@ export const ReviewsPage: React.FC = () => {
           </div>
 
           {/* Upcoming Schedule */}
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-            <h3 className="font-bold text-sm text-white mb-4 flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-indigo-400" />
+          <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
+            <h3 className="font-bold text-sm text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-indigo-500" />
               <span>Upcoming Scheduled Reviews ({upcoming.length})</span>
             </h3>
 
@@ -203,17 +202,17 @@ export const ReviewsPage: React.FC = () => {
               {upcoming.map((item) => (
                 <div
                   key={item.id}
-                  className="p-3 rounded-xl bg-gray-800/30 border border-gray-800/60 flex items-center justify-between text-xs"
+                  className="p-3.5 rounded-2xl bg-slate-50 dark:bg-gray-800/30 border border-slate-200 dark:border-gray-800/60 flex items-center justify-between text-xs font-medium"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-gray-200 font-medium">{item.title || item.problem_slug}</span>
+                    <span className="text-slate-800 dark:text-gray-200 font-bold">{item.title || item.problem_slug}</span>
                     {item.pattern_tag && (
-                      <span className="text-[10px] text-gray-400">({item.pattern_tag})</span>
+                      <span className="text-[10px] text-slate-500 dark:text-gray-400">({item.pattern_tag})</span>
                     )}
                   </div>
-                  <div className="flex items-center gap-3 text-gray-500">
+                  <div className="flex items-center gap-3 text-slate-500 dark:text-gray-400">
                     <span>Due: {item.due_date}</span>
-                    <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-400">
+                    <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-white dark:bg-gray-800 text-slate-600 dark:text-gray-300 font-bold border border-slate-200 dark:border-gray-700">
                       {item.interval_days}d
                     </span>
                   </div>
@@ -224,11 +223,11 @@ export const ReviewsPage: React.FC = () => {
         </div>
 
         {/* Right Col: Problem Note Editor */}
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 flex flex-col justify-between">
+        <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-3xl p-6 flex flex-col justify-between shadow-sm">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <FileEdit className="w-4 h-4 text-purple-400" />
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                <FileEdit className="w-4 h-4 text-purple-500" />
                 <span>Pattern Note Scratchpad</span>
               </h3>
             </div>
@@ -236,12 +235,12 @@ export const ReviewsPage: React.FC = () => {
             {selectedSlug ? (
               <div className="space-y-4">
                 <div className="text-xs">
-                  <span className="text-gray-400">Target Problem: </span>
-                  <span className="font-mono font-bold text-indigo-400">{selectedSlug}</span>
+                  <span className="text-slate-500 dark:text-gray-400">Target Problem: </span>
+                  <span className="font-mono font-extrabold text-indigo-600 dark:text-indigo-400">{selectedSlug}</span>
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-semibold text-gray-400 block mb-1">
+                  <label className="text-[11px] font-bold text-slate-700 dark:text-gray-400 block mb-1">
                     Algorithmic Pattern Tag (e.g. Monotonic Stack, Sliding Window, DP)
                   </label>
                   <input
@@ -249,12 +248,12 @@ export const ReviewsPage: React.FC = () => {
                     value={patternTag}
                     onChange={(e) => setPatternTag(e.target.value)}
                     placeholder="e.g. Dynamic Programming / Knapsack"
-                    className="w-full px-3 py-2 rounded-xl bg-gray-800 border border-gray-700 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-indigo-500"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-semibold text-gray-400 block mb-1">
+                  <label className="text-[11px] font-bold text-slate-700 dark:text-gray-400 block mb-1">
                     Key Insights, Pitfalls &amp; Edge Cases
                   </label>
                   <textarea
@@ -262,27 +261,27 @@ export const ReviewsPage: React.FC = () => {
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
                     placeholder="Write key memoization state transition, cycle detection trick, or optimal complexity notes..."
-                    className="w-full px-3 py-2 rounded-xl bg-gray-800 border border-gray-700 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 font-mono leading-relaxed resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-indigo-500 font-mono leading-relaxed resize-none"
                   />
                 </div>
 
                 <button
                   onClick={handleSaveNote}
                   disabled={savingNote}
-                  className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center justify-center gap-2 transition"
+                  className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-lg shadow-indigo-600/20"
                 >
                   <Save className="w-3.5 h-3.5" />
                   <span>{savingNote ? 'Saving...' : 'Save Problem Note'}</span>
                 </button>
 
                 {saveSuccess && (
-                  <div className="text-xs text-emerald-400 text-center font-medium animate-fade-in">
+                  <div className="text-xs text-emerald-600 dark:text-emerald-400 text-center font-bold animate-fade-in">
                     ✓ Note and pattern tag saved successfully!
                   </div>
                 )}
               </div>
             ) : (
-              <div className="p-8 text-center text-gray-500 text-xs border border-dashed border-gray-800 rounded-xl">
+              <div className="p-8 text-center text-slate-400 dark:text-gray-500 text-xs border border-dashed border-slate-200 dark:border-gray-800 rounded-2xl">
                 Click the edit note icon on any problem on the left to write or review personal pattern notes.
               </div>
             )}

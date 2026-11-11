@@ -47,11 +47,18 @@ export const api = {
   // Auth
   getGithubAuthUrl: () => apiRequest<{ url: string; state: string }>('/auth/github'),
   demoLogin: () => apiRequest<{ token: string; user: any }>('/auth/demo-login', { method: 'POST' }),
+  registerOrLogin: (data: { name?: string; email?: string; githubUsername?: string; leetcodeUsername?: string }) =>
+    apiRequest<{ token: string; apiKey?: string; user: any }>('/auth/register-or-login', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    }),
+  getProfiles: () => apiRequest<{ profiles: any[] }>('/auth/profiles'),
   getMe: () => apiRequest<{ user: any; connectedSources: any }>('/me'),
   regenerateApiKey: () => apiRequest<{ apiKey: string; message: string }>('/apikey/regenerate', { method: 'POST' }),
 
   // Sync
   connectLeetCode: (username: string) => apiRequest('/connect/leetcode', { method: 'POST', body: JSON.stringify({ username }) }),
+  connectGitHub: (username: string) => apiRequest('/connect/github', { method: 'POST', body: JSON.stringify({ username }) }),
   syncNow: () => apiRequest('/sync', { method: 'POST' }),
 
   // Dashboard & Insights

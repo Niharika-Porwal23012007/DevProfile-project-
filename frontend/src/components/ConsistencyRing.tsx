@@ -36,7 +36,7 @@ export const ConsistencyRing: React.FC<ConsistencyRingProps> = ({
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            stroke="#1F2937"
+            className="stroke-slate-200 dark:stroke-gray-800"
             strokeWidth={strokeWidth}
             fill="transparent"
           />
@@ -54,23 +54,23 @@ export const ConsistencyRing: React.FC<ConsistencyRingProps> = ({
           />
         </svg>
         <div className="absolute flex flex-col items-center justify-center text-center">
-          <span className="text-3xl font-extrabold tracking-tight text-white">{Math.round(score)}</span>
-          <span className="text-[11px] font-medium uppercase tracking-wider text-gray-400">Score</span>
+          <span className="text-3xl font-black tracking-tight text-slate-900 dark:text-white">{Math.round(score)}</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-gray-400">Score</span>
         </div>
       </div>
 
       <div className="grid grid-cols-3 gap-2 mt-4 w-full text-center text-xs">
-        <div className="bg-gray-800/60 p-2 rounded-lg border border-gray-700/50">
-          <div className="text-indigo-400 font-bold">{leetcodePts} / 40</div>
-          <div className="text-[10px] text-gray-400">LeetCode</div>
+        <div className="bg-slate-50 dark:bg-gray-800/60 p-2.5 rounded-xl border border-slate-200 dark:border-gray-700/50 shadow-sm">
+          <div className="text-indigo-600 dark:text-indigo-400 font-extrabold">{leetcodePts} / 40</div>
+          <div className="text-[10px] font-medium text-slate-500 dark:text-gray-400">LeetCode</div>
         </div>
-        <div className="bg-gray-800/60 p-2 rounded-lg border border-gray-700/50">
-          <div className="text-emerald-400 font-bold">{githubPts} / 30</div>
-          <div className="text-[10px] text-gray-400">GitHub</div>
+        <div className="bg-slate-50 dark:bg-gray-800/60 p-2.5 rounded-xl border border-slate-200 dark:border-gray-700/50 shadow-sm">
+          <div className="text-emerald-600 dark:text-emerald-400 font-extrabold">{githubPts} / 30</div>
+          <div className="text-[10px] font-medium text-slate-500 dark:text-gray-400">GitHub</div>
         </div>
-        <div className="bg-gray-800/60 p-2 rounded-lg border border-gray-700/50">
-          <div className="text-amber-400 font-bold">{codingPts} / 30</div>
-          <div className="text-[10px] text-gray-400">VS Code</div>
+        <div className="bg-slate-50 dark:bg-gray-800/60 p-2.5 rounded-xl border border-slate-200 dark:border-gray-700/50 shadow-sm">
+          <div className="text-amber-600 dark:text-amber-400 font-extrabold">{codingPts} / 30</div>
+          <div className="text-[10px] font-medium text-slate-500 dark:text-gray-400">VS Code</div>
         </div>
       </div>
     </div>

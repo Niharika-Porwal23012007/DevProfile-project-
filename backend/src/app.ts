@@ -10,6 +10,8 @@ import { draftRouter } from './routes/draftRoutes';
 import { portfolioRouter } from './routes/portfolioRoutes';
 import { userRouter } from './routes/userRoutes';
 import { errorHandler } from './middleware/errorHandler';
+import path from 'path';
+import fs from 'fs';
 
 export const app = express();
 
@@ -36,6 +38,18 @@ app.use('/api', plannerRouter);
 app.use('/api', draftRouter);
 app.use('/api', portfolioRouter);
 app.use('/api', userRouter);
+
+// Serve Frontend Static Build
+const frontendDist = path.resolve(__dirname, '../../frontend/dist');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+}
 
 // Standard Error Handler
 app.use(errorHandler);

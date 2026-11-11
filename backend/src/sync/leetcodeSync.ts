@@ -252,13 +252,14 @@ export class LeetCodeSync {
         VALUES (?, ?, 'leetcode', 'success', datetime('now'))
       `).run(randomUUID(), userId);
     } else {
-      // Record failure without deleting existing data
-      db.prepare(`
-        INSERT INTO leetcode_snapshots (id, user_id, date, easy, medium, hard, sync_status)
-        VALUES (?, ?, ?, 0, 0, 0, 'failed')
-        ON CONFLICT(user_id, date) DO UPDATE SET
-          sync_status = 'failed'
-      `).run(randomUUID(), userId, today);
+      // Record failure without clobbering existing topic data
+      const existingToday = db.prepare('SELECT id FROM leetcode_snapshots WHERE user_id = ? AND date = ?').get(userId, today);
+      if (!existingToday) {
+        db.prepare(`
+          INSERT INTO leetcode_snapshots (id, user_id, date, easy, medium, hard, sync_status)
+          VALUES (?, ?, ?, 0, 0, 0, 'failed')
+        `).run(randomUUID(), userId, today);
+      }
 
       db.prepare(`
         INSERT INTO sync_logs (id, user_id, source, status, error, run_at)

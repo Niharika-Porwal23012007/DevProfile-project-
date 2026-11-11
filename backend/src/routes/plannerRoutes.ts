@@ -33,12 +33,8 @@ plannerRouter.get('/plan/today', requireAuth, async (req: Request, res: Response
   }
 
   // 2. Gather verified facts from database
-  // A. Weakest topics
-  const latestSnapshot = db.prepare("SELECT topic_counts_json FROM leetcode_snapshots WHERE user_id = ? AND sync_status = 'success' ORDER BY date DESC LIMIT 1").get(userId) as any;
-  let topicData: Record<string, any> = {};
-  if (latestSnapshot?.topic_counts_json) {
-    try { topicData = JSON.parse(latestSnapshot.topic_counts_json); } catch (e) {}
-  }
+  // A. Weakest topics via comprehensive topic diagnostic
+  const topicData = AnalysisService.getUserTopicData(userId);
   const weaknessResult = AnalysisService.analyzeWeaknesses(topicData);
   const weakTopics = weaknessResult.weakestTopics.map(w => w.topic);
 

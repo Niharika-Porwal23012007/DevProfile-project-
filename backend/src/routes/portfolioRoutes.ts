@@ -29,7 +29,7 @@ portfolioRouter.get('/portfolio/:publicSlug', (req: Request, res: Response) => {
   const latestSnapshot = db.prepare(`
     SELECT easy, medium, hard, topic_counts_json
     FROM leetcode_snapshots
-    WHERE user_id = ? AND sync_status = 'success'
+    WHERE user_id = ? AND (topic_counts_json IS NOT NULL OR (easy + medium + hard) > 0)
     ORDER BY date DESC LIMIT 1
   `).get(user.id) as any;
 

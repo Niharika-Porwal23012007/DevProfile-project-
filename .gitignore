@@ -23,6 +23,7 @@ out/
 *.sqlite-journal
 *.sqlite-wal
 *.sqlite-shm
+*.db
 *.log
 npm-debug.log*
 yarn-debug.log*

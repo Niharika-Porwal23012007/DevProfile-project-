@@ -79,16 +79,16 @@ Feedback, code reviews, and discussions are welcome!
     totalCommits: number
   ): ProfileChecklist {
     const langStr = topLanguages.slice(0, 3).join(' | ');
-    const headline = `Software Engineering Student @ Medi-Caps University | ${langStr} | ${totalSolves}+ DSA Problems Solved`;
+    const headline = `Software Engineer | ${langStr} | ${totalSolves}+ DSA Problems Solved`;
 
-    const about = `Aspiring Software Engineer passionate about writing clean, resilient code and solving complex algorithmic problems.
+    const about = `Software Engineer passionate about writing clean, resilient code and solving complex algorithmic challenges.
 
-My journey in numbers (DevProfile Verified):
+My engineering journey in numbers (DevProfile Verified):
 - ${totalSolves}+ algorithmic problems solved across ${topTopics.slice(0, 4).join(', ')}.
-- ${totalCommits}+ commits shipped across multiple full-stack and systems projects.
+- ${totalCommits}+ commits shipped across multiple full-stack and cloud projects.
 - Core languages & technologies: ${topLanguages.join(', ')}.
 
-Currently building reliable web platforms and advancing data structures knowledge. Open to software engineering internships and collaborations!`;
+Currently building reliable web applications and refining system architecture skills. Open to engineering opportunities and collaborations!`;
 
     const suggestedSkills = [
       ...topLanguages,

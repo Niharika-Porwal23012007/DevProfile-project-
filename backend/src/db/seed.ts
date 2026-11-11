@@ -37,7 +37,7 @@ export function runSeed() {
   `).run(
     userId,
     'Niharika Porwal',
-    'niharika.porwal@medicaps.ac.in',
+    'niharika.porwal@devprofile.io',
     '8472910',
     'niharikaporwal',
     dummyGhToken,

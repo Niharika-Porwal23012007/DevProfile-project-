@@ -3,9 +3,47 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-[#0B0F19] text-gray-100;
+  :root {
+    --bg-main: #F8FAFC;
+    --card-bg: #FFFFFF;
+    --card-border: #E2E8F0;
+    --card-hover: #F1F5F9;
+    --text-primary: #0F172A;
+    --text-muted: #64748B;
   }
+
+  .dark {
+    --bg-main: #0B0F19;
+    --card-bg: #111827;
+    --card-border: #1F2937;
+    --card-hover: #1E293B;
+    --text-primary: #F8FAFC;
+    --text-muted: #94A3B8;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Glassmorphism & Card Utilities */
+.app-card {
+  @apply bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200;
+}
+
+.app-card-subtle {
+  @apply bg-slate-50 dark:bg-gray-800/40 border border-slate-200 dark:border-gray-800 rounded-xl transition-all;
+}
+
+.text-title {
+  @apply text-slate-900 dark:text-white font-bold tracking-tight;
+}
+
+.text-body {
+  @apply text-slate-600 dark:text-gray-400;
 }
 
 /* Custom scrollbars */
@@ -15,14 +53,22 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0F19;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1F2937;
+  background: #CBD5E1;
   border-radius: 9999px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #1F2937;
+}
+
 ::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #374151;
 }

@@ -39,6 +39,30 @@ syncRouter.post('/connect/leetcode', requireAuth, async (req: Request, res: Resp
 });
 
 /**
+ * POST /api/connect/github
+ * Connect a public GitHub handle directly without needing an OAuth App
+ */
+syncRouter.post('/connect/github', requireAuth, async (req: Request, res: Response, next: NextFunction) => {
+  const { username } = req.body;
+  if (!username || typeof username !== 'string') {
+    return next(new AppError('BAD_REQUEST', 'GitHub username is required.', 400));
+  }
+
+  const cleanUsername = username.trim().replace(/^@/, '');
+  db.prepare('UPDATE users SET github_username = ? WHERE id = ?').run(cleanUsername, req.user!.id);
+
+  try {
+    const syncRes = await GitHubSync.syncUser(req.user!.id);
+    res.json({
+      message: `GitHub profile connected for @${cleanUsername}`,
+      sync: syncRes
+    });
+  } catch (err: any) {
+    next(new AppError('GITHUB_SYNC_FAILED', err.message || 'Could not sync GitHub profile', 400));
+  }
+});
+
+/**
  * POST /api/sync
  * Manual sync (rate limited)
  */
@@ -56,15 +80,25 @@ syncRouter.post('/sync', requireAuth, async (req: Request, res: Response, next: 
 
   const results: { github?: any; leetcode?: any } = {};
 
-  // Sync GitHub
-  const user = db.prepare('SELECT github_token_enc, leetcode_username FROM users WHERE id = ?').get(userId) as any;
-  if (user?.github_token_enc) {
-    results.github = await GitHubSync.syncUser(userId);
+  // Sync GitHub (supports both OAuth token and public username)
+  const user = db.prepare('SELECT github_token_enc, github_username, leetcode_username FROM users WHERE id = ?').get(userId) as any;
+  if (user?.github_token_enc || user?.github_username) {
+    try {
+      results.github = await GitHubSync.syncUser(userId);
+    } catch (ghErr: any) {
+      console.warn('[SyncRoutes] GitHub sync notice:', ghErr.message);
+      results.github = { success: false, error: ghErr.message };
+    }
   }
 
   // Sync LeetCode
   if (user?.leetcode_username) {
-    results.leetcode = await LeetCodeSync.syncUser(userId);
+    try {
+      results.leetcode = await LeetCodeSync.syncUser(userId);
+    } catch (lcErr: any) {
+      console.warn('[SyncRoutes] LeetCode sync notice:', lcErr.message);
+      results.leetcode = { syncStatus: 'failed', error: lcErr.message };
+    }
   }
 
   // Recalculate today's score

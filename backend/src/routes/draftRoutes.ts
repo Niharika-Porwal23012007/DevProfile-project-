@@ -93,7 +93,7 @@ draftRouter.post('/drafts', requireAuth, (req: Request, res: Response, next: Nex
     const repos = db.prepare('SELECT primary_language FROM github_repos WHERE user_id = ?').all(userId) as any[];
     const topLangs = Array.from(new Set(repos.map(r => r.primary_language).filter(Boolean))) as string[];
 
-    const latestSnapshot = db.prepare("SELECT topic_counts_json, easy, medium, hard FROM leetcode_snapshots WHERE user_id = ? AND sync_status = 'success' ORDER BY date DESC LIMIT 1").get(userId) as any;
+    const latestSnapshot = db.prepare("SELECT topic_counts_json, easy, medium, hard FROM leetcode_snapshots WHERE user_id = ? AND (topic_counts_json IS NOT NULL OR (easy + medium + hard) > 0) ORDER BY date DESC LIMIT 1").get(userId) as any;
     let topics: string[] = ['Dynamic Programming', 'Graphs', 'Trees', 'Binary Search'];
     if (latestSnapshot?.topic_counts_json) {
       try {

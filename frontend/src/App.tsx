@@ -20,6 +20,25 @@ export function App() {
   const [reviewCount, setReviewCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
+  // Theme state: 'dark' | 'light'
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    const saved = localStorage.getItem('devprofile_theme');
+    return (saved === 'light' || saved === 'dark') ? saved : 'dark';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('devprofile_theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
   // Check URL pathname for direct public portfolio navigation
   const path = window.location.pathname;
   if (path.startsWith('/portfolio/')) {
@@ -78,23 +97,32 @@ export function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0B0F19] text-gray-100 flex items-center justify-center text-sm">
-        <div className="animate-spin mr-2 w-5 h-5 border-2 border-indigo-500 border-t-transparent rounded-full" />
-        <span>Initializing DevProfile...</span>
+      <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] text-slate-800 dark:text-gray-100 flex items-center justify-center text-sm font-medium">
+        <div className="animate-spin mr-3 w-5 h-5 border-2 border-indigo-600 border-t-transparent rounded-full" />
+        <span>Synchronizing your engineering footprint...</span>
       </div>
     );
   }
 
   if (!user || !sources) {
-    return <LandingPage onLoginSuccess={handleLoginSuccess} />;
+    return (
+      <LandingPage
+        theme={theme}
+        onToggleTheme={toggleTheme}
+        onLoginSuccess={handleLoginSuccess}
+      />
+    );
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-gray-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-gray-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif] transition-colors">
       <Navbar
         user={user}
+        theme={theme}
+        onToggleTheme={toggleTheme}
         onLogout={handleLogout}
         onSyncComplete={loadUserProfile}
+        onSwitchProfile={() => loadUserProfile()}
       />
 
       <div className="flex flex-1">
@@ -117,6 +145,8 @@ export function App() {
               connectedSources={sources}
               onUserUpdated={loadUserProfile}
               onLogout={handleLogout}
+              theme={theme}
+              onSetTheme={setTheme}
             />
           )}
         </main>
