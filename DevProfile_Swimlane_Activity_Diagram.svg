@@ -1,0 +1,334 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1350" width="2400" height="1350" style="background:#f8fafc; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <filter id="cardShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.05"/>
+    </filter>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0d9488"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ea580c"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2400" height="1350" fill="#f8fafc"/>
+
+  <!-- Presentation Header Banner -->
+  <rect x="50" y="20" width="2300" height="95" rx="14" fill="#ffffff" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="85" y="60" font-size="26" font-weight="800" fill="#0f172a">DevProfile — End-to-End System Activity Diagram (Actor Swimlanes)</text>
+  <text x="85" y="90" font-size="14" font-weight="500" fill="#64748b">UML 2.5 Activity Partition Standard • Complete Cross-Actor Execution Lifecycle: Web Client • VS Code Extension • Backend &amp; Cron • Public Recruiter</text>
+
+  <!-- Legend Badges on Header Right -->
+  <g transform="translate(1420, 35)">
+    <rect x="0" y="0" width="900" height="65" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+    
+    <circle cx="25" cy="22" r="8" fill="#1e293b"/>
+    <text x="42" y="26" font-size="12" font-weight="700" fill="#1e293b">Start / End Node</text>
+
+    <rect x="180" y="13" width="18" height="18" rx="4" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+    <text x="206" y="26" font-size="12" font-weight="700" fill="#1e293b">Activity Action</text>
+
+    <polygon points="340,22 352,12 364,22 352,32" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+    <text x="372" y="26" font-size="12" font-weight="700" fill="#1e293b">Decision Diamond</text>
+
+    <line x1="510" y1="22" x2="550" y2="22" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="560" y="26" font-size="12" font-weight="700" fill="#1e293b">Cross-Lane Transition Hand-off</text>
+
+    <text x="20" y="50" font-size="11" font-weight="600" fill="#475569">Academic Note: Swimlanes model Actor/Subsystem partitions. Individual Use Cases detail within each partition.</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- 4 VERTICAL SWIMLANES (Columns)                                 -->
+  <!-- ============================================================== -->
+
+  <!-- SWIMLANE 1: Student / Developer (Web Client) -->
+  <g transform="translate(50, 130)">
+    <rect width="550" height="1160" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+    <rect width="550" height="52" rx="12" fill="#1e40af"/>
+    <rect y="40" width="550" height="12" fill="#1e40af"/>
+    <text x="275" y="32" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">ACTOR 1: DEVELOPER / STUDENT (WEB UI)</text>
+  </g>
+
+  <!-- SWIMLANE 2: VS Code Extension (Client Telemetry) -->
+  <g transform="translate(630, 130)">
+    <rect width="550" height="1160" rx="12" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2"/>
+    <rect width="550" height="52" rx="12" fill="#0f766e"/>
+    <rect y="40" width="550" height="12" fill="#0f766e"/>
+    <text x="275" y="32" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">ACTOR 2: VS CODE EXTENSION (IDE TELEMETRY)</text>
+  </g>
+
+  <!-- SWIMLANE 3: Backend & Cron Engine (Server & Database) -->
+  <g transform="translate(1210, 130)">
+    <rect width="580" height="1160" rx="12" fill="#faf5ff" stroke="#e9d5ff" stroke-width="2"/>
+    <rect width="580" height="52" rx="12" fill="#5b21b6"/>
+    <rect y="40" width="580" height="12" fill="#5b21b6"/>
+    <text x="290" y="32" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">ACTORS 3 &amp; 4: BACKEND &amp; CRON SCHEDULER</text>
+  </g>
+
+  <!-- SWIMLANE 4: Recruiter / Peer (External Visitor) -->
+  <g transform="translate(1820, 130)">
+    <rect width="530" height="1160" rx="12" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
+    <rect width="530" height="52" rx="12" fill="#c2410c"/>
+    <rect y="40" width="530" height="12" fill="#c2410c"/>
+    <text x="265" y="32" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">ACTOR 5: RECRUITER / PEER (PUBLIC)</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CROSS-LANE CONNECTOR LINES (Rendered below nodes)               -->
+  <!-- ============================================================== -->
+
+  <!-- Lane 1 (Node 1) -> Lane 3 (Node 2): Auth / Registration Hand-off -->
+  <path d="M 520 250 L 1270 250" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <rect x="760" y="230" width="220" height="20" rx="4" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="870" y="244" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">POST /api/auth/register-or-login</text>
+
+  <!-- Lane 3 (Node 3) -> Lane 1 (Node 4): Issue JWT & Seed Baseline -->
+  <path d="M 1270 360 C 950 360, 950 360, 520 360" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrow-purple)"/>
+  <rect x="780" y="340" width="180" height="20" rx="4" fill="#ffffff" stroke="#e9d5ff"/>
+  <text x="870" y="354" text-anchor="middle" font-size="11" font-weight="700" fill="#6d28d9">Return JWT + API Key Hash</text>
+
+  <!-- Lane 1 (Node 4) -> Lane 2 (Node 5): Copy API Key into Extension -->
+  <path d="M 520 440 L 690 440" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#arrow-teal)"/>
+  <rect x="535" y="420" width="140" height="20" rx="4" fill="#ffffff" stroke="#99f6e4"/>
+  <text x="605" y="434" text-anchor="middle" font-size="11" font-weight="700" fill="#0f766e">Configure API Key</text>
+
+  <!-- Lane 2 (Node 8: Decision Yes) -> Lane 3 (Node 9): Flag Struggled & Schedule Review -->
+  <path d="M 1120 625 L 1270 625" fill="none" stroke="#ea580c" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+  <rect x="1135" y="605" width="125" height="20" rx="4" fill="#ffffff" stroke="#fed7aa"/>
+  <text x="1197" y="619" text-anchor="middle" font-size="11" font-weight="700" fill="#c2410c">POST /problem-times</text>
+
+  <!-- Lane 2 (Node 6: Session Flush) -> Lane 3 (Node 10): Batch Telemetry -->
+  <path d="M 1120 520 C 1195 520, 1195 720, 1270 720" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-teal)"/>
+  <rect x="1135" y="550" width="125" height="20" rx="4" fill="#ffffff" stroke="#99f6e4"/>
+  <text x="1197" y="564" text-anchor="middle" font-size="11" font-weight="700" fill="#0f766e">POST /api/sessions</text>
+
+  <!-- Lane 3 (Node 9 & 11) -> Lane 1 (Node 12): Spaced Review & Daily Plan -->
+  <path d="M 1270 820 L 520 820" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrow-purple)"/>
+  <rect x="770" y="800" width="200" height="20" rx="4" fill="#ffffff" stroke="#e9d5ff"/>
+  <text x="870" y="814" text-anchor="middle" font-size="11" font-weight="700" fill="#6d28d9">GET /reviews/today &amp; /plan</text>
+
+  <!-- Lane 1 (Node 14) -> Lane 3 (Node 15): Enable Public Portfolio Toggle -->
+  <path d="M 520 1020 L 1270 1020" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <rect x="760" y="1000" width="220" height="20" rx="4" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="870" y="1014" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">PATCH /api/account/privacy</text>
+
+  <!-- Lane 3 (Node 15) -> Lane 4 (Node 16): Serve Public Portfolio URL -->
+  <path d="M 1730 1020 L 1870 1020" fill="none" stroke="#ea580c" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+  <rect x="1740" y="1000" width="120" height="20" rx="4" fill="#ffffff" stroke="#fed7aa"/>
+  <text x="1800" y="1014" text-anchor="middle" font-size="11" font-weight="700" fill="#c2410c">GET /portfolio/:slug</text>
+
+  <!-- ============================================================== -->
+  <!-- NODES IN LANE 1: STUDENT / DEVELOPER (WEB UI)                  -->
+  <!-- ============================================================== -->
+
+  <!-- Start Node -->
+  <circle cx="310" cy="200" r="14" fill="#1e293b"/>
+  <circle cx="310" cy="200" r="18" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <line x1="310" y1="218" x2="310" y2="230" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 1: Register or Login -->
+  <g transform="translate(100, 230)" filter="url(#cardShadow)">
+    <rect width="420" height="70" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="20" y="26" font-size="13" font-weight="800" fill="#1e40af">1. Register or Log in (Web App)</text>
+    <text x="20" y="46" font-size="12" fill="#475569">Enter Email, GitHub handle, LeetCode username</text>
+    <text x="20" y="60" font-size="11" font-weight="600" fill="#2563eb">[UC-01 Universal Auth / UC-02 OAuth]</text>
+  </g>
+
+  <!-- Node 4: View Dashboard & AI Plan -->
+  <g transform="translate(100, 330)" filter="url(#cardShadow)">
+    <rect width="420" height="75" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#1e40af">4. View Dashboard &amp; AI Daily Plan</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Inspect merged heatmap, active streak, focus tasks</text>
+    <text x="20" y="62" font-size="11" font-weight="600" fill="#2563eb">[UC-05 Dashboard / UC-09 AI Planner]</text>
+  </g>
+  <line x1="310" y1="405" x2="310" y2="435" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Local Node: View Goal Progress -->
+  <g transform="translate(100, 435)" filter="url(#cardShadow)">
+    <rect width="420" height="65" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#1e40af">Goal Tracking &amp; Streak Freeze</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Target: 2 solves, 3 commits, 60m coding daily</text>
+    <text x="20" y="58" font-size="11" font-weight="600" fill="#2563eb">[UC-06 Goal Setting &amp; Progress]</text>
+  </g>
+
+  <!-- Node 12: Complete Due Reviews -->
+  <g transform="translate(100, 785)" filter="url(#cardShadow)">
+    <rect width="420" height="80" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#1e40af">12. Solve Due Reviews &amp; Check Off Plan</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Review struggling DSA patterns (3/7/21/30d queue)</text>
+    <text x="20" y="62" font-size="11" font-weight="600" fill="#2563eb">[UC-10 Spaced Repetition / UC-09 Task Toggle]</text>
+  </g>
+  <line x1="310" y1="865" x2="310" y2="895" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Node 13: Generate LinkedIn Draft -->
+  <g transform="translate(100, 895)" filter="url(#cardShadow)">
+    <rect width="420" height="75" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#1e40af">13. Generate Verified LinkedIn Post</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Synthesizes verified metrics (no hallucination)</text>
+    <text x="20" y="62" font-size="11" font-weight="600" fill="#2563eb">[UC-11 Anti-Fabrication Draft Generator]</text>
+  </g>
+  <line x1="310" y1="970" x2="310" y2="995" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Node 14: Enable Public Portfolio -->
+  <g transform="translate(100, 995)" filter="url(#cardShadow)">
+    <rect width="420" height="75" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#1e40af">14. Enable Public Portfolio Toggle</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Sets is_public = 1 &amp; configures custom slug</text>
+    <text x="20" y="62" font-size="11" font-weight="600" fill="#2563eb">[UC-15 Public Portfolio / UC-16 Privacy]</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- NODES IN LANE 2: VS CODE EXTENSION (IDE TELEMETRY)             -->
+  <!-- ============================================================== -->
+
+  <!-- Node 5: Extension Config -->
+  <g transform="translate(690, 415)" filter="url(#cardShadow)">
+    <rect width="430" height="65" rx="8" fill="#ffffff" stroke="#14b8a6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#0f766e">5. Configure Extension API Key</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Store SHA-256 key; initialize heartbeat sync</text>
+    <text x="20" y="58" font-size="11" font-weight="600" fill="#0d9488">[UC-19 API Key Management]</text>
+  </g>
+  <line x1="905" y1="480" x2="905" y2="505" stroke="#14b8a6" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- Node 6: Active Session Tracking -->
+  <g transform="translate(690, 505)" filter="url(#cardShadow)">
+    <rect width="430" height="70" rx="8" fill="#ffffff" stroke="#14b8a6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#0f766e">6. Track Active Coding Sessions</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Logs keystrokes, active files, language &amp; project</text>
+    <text x="20" y="60" font-size="11" font-weight="600" fill="#0d9488">[UC-12 VS Code Automatic Session Tracking]</text>
+  </g>
+  <line x1="905" y1="575" x2="905" y2="595" stroke="#14b8a6" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- Node 7: Pomodoro & Problem Timer -->
+  <g transform="translate(690, 595)" filter="url(#cardShadow)">
+    <rect width="250" height="60" rx="8" fill="#ffffff" stroke="#14b8a6" stroke-width="1.5"/>
+    <text x="15" y="24" font-size="12" font-weight="800" fill="#0f766e">7. Pomodoro &amp; Timer</text>
+    <text x="15" y="42" font-size="11" fill="#475569">Focus 25m / Problem solve</text>
+    <text x="15" y="54" font-size="10" font-weight="600" fill="#0d9488">[UC-13 Timer / UC-14 Pomodoro]</text>
+  </g>
+
+  <!-- Decision Diamond 8: Struggled? -->
+  <g transform="translate(980, 595)">
+    <polygon points="50,0 100,30 50,60 0,30" fill="#ffffff" stroke="#ea580c" stroke-width="2"/>
+    <text x="50" y="26" text-anchor="middle" font-size="10" font-weight="800" fill="#c2410c">Struggled</text>
+    <text x="50" y="40" text-anchor="middle" font-size="10" font-weight="800" fill="#c2410c">or &gt;40m?</text>
+  </g>
+  <line x1="940" y1="625" x2="980" y2="625" stroke="#14b8a6" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <line x1="1080" y1="625" x2="1120" y2="625" stroke="#ea580c" stroke-width="2"/>
+  <text x="1090" y="618" font-size="10" font-weight="700" fill="#c2410c">Yes</text>
+
+  <!-- If No: Flushes to coding minutes -->
+  <path d="M 1030 655 C 1030 700, 905 700, 905 730" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1035" y="675" font-size="10" font-weight="700" fill="#64748b">No</text>
+  <g transform="translate(690, 730)" filter="url(#cardShadow)">
+    <rect width="430" height="50" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="20" y="22" font-size="12" font-weight="800" fill="#334155">Flushed to Daily Coding Duration</text>
+    <text x="20" y="38" font-size="11" fill="#64748b">Time rolled into consistency score (30 pts coding max)</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- NODES IN LANE 3: BACKEND & CRON SCHEDULER                      -->
+  <!-- ============================================================== -->
+
+  <!-- Node 2: Ingest Platform Data -->
+  <g transform="translate(1270, 230)" filter="url(#cardShadow)">
+    <rect width="460" height="70" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#5b21b6">2. Live Multi-Platform Sync</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Fetch GitHub Repos/Commits &amp; LeetCode Solves/Topics</text>
+    <text x="20" y="60" font-size="11" font-weight="600" fill="#7c3aed">[UC-03 Platform Connection / UC-04 Sync]</text>
+  </g>
+  <line x1="1500" y1="300" x2="1500" y2="330" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Node 3: Seed Baseline & Issue Credentials -->
+  <g transform="translate(1270, 330)" filter="url(#cardShadow)">
+    <rect width="460" height="70" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#5b21b6">3. Seed 30-Day Activity &amp; Issue JWT</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Store snapshots in SQLite WAL mode; seed default goals</text>
+    <text x="20" y="60" font-size="11" font-weight="600" fill="#7c3aed">[UC-01 Registration Seeding / SQLite WAL]</text>
+  </g>
+
+  <!-- Node 9: Enqueue Spaced Repetition -->
+  <g transform="translate(1270, 600)" filter="url(#cardShadow)">
+    <rect width="460" height="70" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#5b21b6">9. Enqueue Spaced Repetition Review</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Interval: 3 → 7 → 21 → 30 days; reset to 3d if failed</text>
+    <text x="20" y="60" font-size="11" font-weight="600" fill="#7c3aed">[UC-10 Spaced Repetition Review Queue]</text>
+  </g>
+  <line x1="1500" y1="670" x2="1500" y2="700" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Node 10: Nightly Cron Job -->
+  <g transform="translate(1270, 700)" filter="url(#cardShadow)">
+    <rect width="460" height="70" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#5b21b6">10. Nightly Cron Batch (00:05 AM)</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Pull daily solves, commits &amp; session hours for all users</text>
+    <text x="20" y="60" font-size="11" font-weight="600" fill="#7c3aed">[UC-20 Nightly Automated Sync &amp; Pruning]</text>
+  </g>
+  <line x1="1500" y1="770" x2="1500" y2="795" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Node 11: Algorithmic Diagnostics -->
+  <g transform="translate(1270, 795)" filter="url(#cardShadow)">
+    <rect width="460" height="75" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#5b21b6">11. Algorithmic Diagnostics &amp; Scoring</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Score = LC(40) + GH(30) + Code(30); detect balance drift</text>
+    <text x="20" y="62" font-size="11" font-weight="600" fill="#7c3aed">[UC-07 Weakness Engine / UC-08 Balance / Readiness]</text>
+  </g>
+
+  <!-- Node 15: Serve Public Portfolio Data -->
+  <g transform="translate(1270, 995)" filter="url(#cardShadow)">
+    <rect width="460" height="75" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#5b21b6">15. Serve Public Portfolio &amp; Badges</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Compile verified stats, pinned repos, streak, heatmap</text>
+    <text x="20" y="62" font-size="11" font-weight="600" fill="#7c3aed">[UC-15 Verified Public Portfolio Endpoint]</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- NODES IN LANE 4: RECRUITER / PEER (PUBLIC)                     -->
+  <!-- ============================================================== -->
+
+  <!-- Node 16: Access Public URL -->
+  <g transform="translate(1870, 995)" filter="url(#cardShadow)">
+    <rect width="430" height="75" rx="8" fill="#ffffff" stroke="#f97316" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#c2410c">16. Open Public Portfolio URL</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Navigate to /portfolio/:slug without login credentials</text>
+    <text x="20" y="62" font-size="11" font-weight="600" fill="#ea580c">[Actor 2: External Recruiter / Peer Access]</text>
+  </g>
+  <line x1="2085" y1="1070" x2="2085" y2="1105" stroke="#f97316" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Node 17: Inspect Verified Proof of Work -->
+  <g transform="translate(1870, 1105)" filter="url(#cardShadow)">
+    <rect width="430" height="80" rx="8" fill="#ffffff" stroke="#f97316" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="800" fill="#c2410c">17. Inspect Verified Proof-of-Work</text>
+    <text x="20" y="44" font-size="12" fill="#475569">Evaluate real commit velocity, DSA mastery, topic tags</text>
+    <text x="20" y="62" font-size="11" font-weight="600" fill="#ea580c">[Anti-Fabrication Portfolio Evaluation]</text>
+  </g>
+  <line x1="2085" y1="1185" x2="2085" y2="1215" stroke="#f97316" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- End Node -->
+  <g transform="translate(2085, 1235)">
+    <circle cx="0" cy="0" r="14" fill="#1e293b"/>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#1e293b" stroke-width="2"/>
+    <text x="30" y="6" font-size="13" font-weight="800" fill="#1e293b">END</text>
+  </g>
+
+  <!-- Presentation Footer Info -->
+  <g transform="translate(50, 1300)">
+    <rect width="2300" height="32" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+    <text x="25" y="21" font-size="12" font-weight="700" fill="#475569">Standard UML 2.5 Activity Partition Specification: 4 Architectural Swimlanes • Complete 20-Use-Case Lifecycle • Hand-offs Across Physical &amp; Client Boundaries</text>
+    <text x="2275" y="21" text-anchor="end" font-size="12" font-weight="600" fill="#64748b">DevProfile End-to-End Activity Flow</text>
+  </g>
+</svg>
