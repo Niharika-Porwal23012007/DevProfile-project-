@@ -1,0 +1,480 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1450" width="2400" height="1450" style="background:#f8fafc; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <filter id="cardShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0d9488"/>
+    </marker>
+    
+    <!-- Composition Diamond Marker -->
+    <marker id="diamond" viewBox="0 0 16 10" refX="0" refY="5" markerWidth="12" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 5 L 8 0 L 16 5 L 8 10 z" fill="#1e293b"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="2400" height="1450" fill="#f8fafc"/>
+
+  <!-- Presentation Header Banner -->
+  <rect x="50" y="25" width="2300" height="100" rx="14" fill="#ffffff" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="85" y="68" font-size="26" font-weight="800" fill="#0f172a">DevProfile — Architectural UML Class Diagram (Domain Model)</text>
+  <text x="85" y="100" font-size="15" font-weight="500" fill="#64748b">Standard 3-Compartment Specification [Class Name | Typed Attributes | Typed Operations] • 9 Cohesive Architectural Classes (Zero Floating Classes)</text>
+
+  <!-- Legend Badges on Header Right -->
+  <g transform="translate(1420, 42)">
+    <rect x="0" y="0" width="900" height="65" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+    
+    <!-- Legend item 1 -->
+    <rect x="15" y="15" width="14" height="14" rx="3" fill="#1e40af"/>
+    <text x="36" y="27" font-size="12" font-weight="700" fill="#1e293b">Core Domain Entity</text>
+    
+    <!-- Legend item 2 -->
+    <rect x="175" y="15" width="14" height="14" rx="3" fill="#0f766e"/>
+    <text x="196" y="27" font-size="12" font-weight="700" fill="#1e293b">Platform Tracker / Telemetry</text>
+
+    <!-- Legend item 3 -->
+    <rect x="385" y="15" width="14" height="14" rx="3" fill="#6d28d9"/>
+    <text x="406" y="27" font-size="12" font-weight="700" fill="#1e293b">Algorithmic &amp; Planning Engine</text>
+
+    <!-- Legend item 4: Diamond & Arrow -->
+    <path d="M 605 22 L 613 18 L 621 22 L 613 26 Z" fill="#1e293b"/>
+    <line x1="621" y1="22" x2="655" y2="22" stroke="#1e293b" stroke-width="2"/>
+    <text x="663" y="26" font-size="12" font-weight="600" fill="#334155">Composition (1 to *)</text>
+
+    <!-- Legend item 5: Dashed Arrow -->
+    <line x1="15" y1="48" x2="65" y2="48" stroke="#475569" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+    <text x="75" y="52" font-size="12" font-weight="600" fill="#334155">Dependency (..&gt; consumes / triggers)</text>
+
+    <text x="385" y="52" font-size="12" font-weight="600" fill="#0369a1">+ Public Visibility  |  - Private Visibility  |  Standard 3-Compartment Layout</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CONNECTOR LINES (Rendered underneath cards)                     -->
+  <!-- ============================================================== -->
+
+  <!-- 1. User -> ActivityMetric (Composition: User owns ActivityMetric) -->
+  <line x1="740" y1="310" x2="820" y2="310" stroke="#1e293b" stroke-width="2.5" marker-start="url(#diamond)"/>
+  <rect x="748" y="285" width="55" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="753" y="299" font-size="11" font-weight="700" fill="#1e293b">1 *-- *</text>
+
+  <!-- 2. User -> GitHubTracker (Composition: User owns GitHubTracker) -->
+  <line x1="280" y1="520" x2="280" y2="570" stroke="#1e293b" stroke-width="2.5" marker-start="url(#diamond)"/>
+  <rect x="286" y="533" width="70" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="290" y="547" font-size="11" font-weight="700" fill="#1e293b">1 *-- 1</text>
+
+  <!-- 3. User -> LeetCodeTracker (Composition: User owns LeetCodeTracker) -->
+  <path d="M 600 520 C 600 545, 840 545, 840 570" fill="none" stroke="#1e293b" stroke-width="2.5" marker-start="url(#diamond)"/>
+  <rect x="680" y="533" width="85" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="685" y="547" font-size="11" font-weight="700" fill="#1e293b">1 *-- 1 manages</text>
+
+  <!-- 4. TelemetryManager -> ActivityMetric (Dependency: logs duration) -->
+  <line x1="1580" y1="310" x2="1500" y2="310" stroke="#0d9488" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-teal)"/>
+  <rect x="1508" y="285" width="65" height="20" rx="4" fill="#ffffff" stroke="#ccfbf1"/>
+  <text x="1512" y="299" font-size="11" font-weight="700" fill="#0f766e">..&gt; logs time</text>
+
+  <!-- 5. TelemetryManager -> SpacedRepetitionQueue (Dependency: flags struggle via Timer/Pomodoro) -->
+  <line x1="1950" y1="520" x2="1950" y2="570" stroke="#0d9488" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#arrow-teal)"/>
+  <rect x="1870" y="532" width="160" height="22" rx="4" fill="#ffffff" stroke="#ccfbf1"/>
+  <text x="1876" y="547" font-size="11" font-weight="700" fill="#0f766e">..&gt; flags struggle (Timer/Pomodoro)</text>
+
+  <!-- 6. SpacedRepetitionQueue -> LeetCodeTracker (Dependency: monitors solves) -->
+  <line x1="1580" y1="730" x2="1500" y2="730" stroke="#475569" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+  <rect x="1512" y="705" width="62" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="1516" y="719" font-size="11" font-weight="700" fill="#334155">..&gt; monitors</text>
+
+  <!-- 7. WeaknessDiagnosticEngine -> GitHubTracker (Dependency: correlates repo commits) -->
+  <line x1="280" y1="980" x2="280" y2="920" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-purple)"/>
+  <rect x="290" y="938" width="85" height="20" rx="4" fill="#ffffff" stroke="#ede9fe"/>
+  <text x="294" y="952" font-size="11" font-weight="700" fill="#6d28d9">..&gt; correlates</text>
+
+  <!-- 8. WeaknessDiagnosticEngine -> LeetCodeTracker (Dependency: evaluates topic deficits) -->
+  <path d="M 680 980 C 680 950, 920 950, 920 920" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-purple)"/>
+  <rect x="730" y="938" width="135" height="20" rx="4" fill="#ffffff" stroke="#ede9fe"/>
+  <text x="735" y="952" font-size="11" font-weight="700" fill="#6d28d9">..&gt; evaluates deficits</text>
+
+  <!-- 9. AIDailyPlanner -> WeaknessDiagnosticEngine (Dependency: consumes diagnostics) -->
+  <line x1="840" y1="1160" x2="740" y2="1160" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-purple)"/>
+  <rect x="748" y="1135" width="84" height="20" rx="4" fill="#ffffff" stroke="#ede9fe"/>
+  <text x="752" y="1149" font-size="11" font-weight="700" fill="#6d28d9">..&gt; consumes</text>
+
+  <!-- 10. AIDailyPlanner -> SpacedRepetitionQueue (Dependency: schedules due reviews) -->
+  <path d="M 1510 1080 C 1600 1080, 1680 980, 1680 920" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-purple)"/>
+  <rect x="1560" y="985" width="125" height="20" rx="4" fill="#ffffff" stroke="#ede9fe"/>
+  <text x="1565" y="999" font-size="11" font-weight="700" fill="#6d28d9">..&gt; schedules reviews</text>
+
+  <!-- 11. LinkedInDraftGenerator -> ActivityMetric (Dependency: reads verified metrics) -->
+  <path d="M 1950 980 C 1950 820, 1450 800, 1450 520" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-blue)"/>
+  <rect x="1670" y="780" width="135" height="20" rx="4" fill="#ffffff" stroke="#dbeafe"/>
+  <text x="1675" y="794" font-size="11" font-weight="700" fill="#1d4ed8">..&gt; reads verified metrics</text>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 1: User (Top-Left)                                       -->
+  <!-- ============================================================== -->
+  <g transform="translate(60, 160)" filter="url(#cardShadow)">
+    <!-- Box border & background -->
+    <rect width="680" height="360" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="680" height="60" rx="10" fill="#1e40af"/>
+    <rect y="48" width="680" height="12" fill="#1e40af"/>
+    <text x="340" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#93c5fd">&lt;&lt;Aggregate Root / Domain Entity&gt;&gt;</text>
+    <text x="340" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">User</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="680" height="145" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="680" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> id : string <tspan fill="#64748b">[PK, UUID]</tspan></text>
+      <text y="20"><tspan font-weight="700" fill="#16a34a">+</tspan> name : string</text>
+      <text y="40"><tspan font-weight="700" fill="#16a34a">+</tspan> email : string <tspan fill="#64748b">[Unique]</tspan></text>
+      <text y="60"><tspan font-weight="700" fill="#16a34a">+</tspan> githubUsername : string</text>
+      <text y="80"><tspan font-weight="700" fill="#16a34a">+</tspan> leetcodeUsername : string</text>
+      <text y="100"><tspan font-weight="700" fill="#16a34a">+</tspan> publicSlug : string <tspan fill="#64748b">[URL slug]</tspan>  |  <tspan font-weight="700" fill="#16a34a">+</tspan> isPublic : int</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> apiKeyHash : string  |  <tspan font-weight="700" fill="#dc2626">-</tspan> githubTokenEnc : string</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="205" width="680" height="155" fill="#ffffff"/>
+    <line x1="0" y1="205" x2="680" y2="205" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 226)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> register(name: string, email: string) : string</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> authenticate(credentials: object) : string</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> togglePrivacy(isPublic: boolean) : boolean</text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> regenerateApiKey() : string</text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> exportUserData() : UserArchiveJSON</text>
+      <text y="120"><tspan font-weight="700" fill="#16a34a">+</tspan> deleteAccount(confirmation: boolean) : boolean</text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 2: ActivityMetric (Top-Center)                           -->
+  <!-- ============================================================== -->
+  <g transform="translate(820, 160)" filter="url(#cardShadow)">
+    <rect width="680" height="360" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="680" height="60" rx="10" fill="#1e3a8a"/>
+    <rect y="48" width="680" height="12" fill="#1e3a8a"/>
+    <text x="340" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#93c5fd">&lt;&lt;Domain Entity / Aggregation&gt;&gt;</text>
+    <text x="340" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">ActivityMetric</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="680" height="145" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="680" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> date : string <tspan fill="#64748b">[YYYY-MM-DD, Index]</tspan></text>
+      <text y="20"><tspan font-weight="700" fill="#16a34a">+</tspan> totalSolves : int <tspan fill="#64748b">[LeetCode daily count]</tspan></text>
+      <text y="40"><tspan font-weight="700" fill="#16a34a">+</tspan> commitCount : int <tspan fill="#64748b">[GitHub daily commits]</tspan></text>
+      <text y="60"><tspan font-weight="700" fill="#16a34a">+</tspan> codingMinutes : int <tspan fill="#64748b">[VS Code session roll-up]</tspan></text>
+      <text y="80"><tspan font-weight="700" fill="#16a34a">+</tspan> consistencyScore : float <tspan fill="#64748b">[0..100 composite]</tspan></text>
+      <text y="100"><tspan font-weight="700" fill="#16a34a">+</tspan> activeStreak : int <tspan fill="#64748b">[Rolling days, freeze-aware]</tspan></text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> scoreBreakdown : map&lt;string, float&gt;</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="205" width="680" height="155" fill="#ffffff"/>
+    <line x1="0" y1="205" x2="680" y2="205" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 226)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> calculateDailyScore(solves: int, commits: int, min: int) : float</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> evaluateStreak(threshold: int, freezeUsed: boolean) : int</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> getHeatmapIntensity() : int <tspan fill="#64748b">[Levels 0..4 for UI]</tspan></text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> aggregateHistoricalTotals(days: int) : MetricSummary</text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> getRollingAverages(windowSize: int) : RollingStats</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> applyStreakFreezeRule(rollingDays: array) : boolean</text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 3: TelemetryManager (Top-Right: Integrated Extension)     -->
+  <!-- ============================================================== -->
+  <g transform="translate(1580, 160)" filter="url(#cardShadow)">
+    <rect width="760" height="360" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="760" height="60" rx="10" fill="#0f766e"/>
+    <rect y="48" width="760" height="12" fill="#0f766e"/>
+    <text x="380" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#99f6e4">&lt;&lt;Client Telemetry &amp; Session Manager&gt;&gt;</text>
+    <text x="380" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">TelemetryManager</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="760" height="145" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="760" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#dc2626">-</tspan> activeProblemSlug : string</text>
+      <text y="20"><tspan font-weight="700" fill="#dc2626">-</tspan> problemStartTime : Date</text>
+      <text y="40"><tspan font-weight="700" fill="#dc2626">-</tspan> isTrackingPaused : boolean</text>
+      <text y="60"><tspan font-weight="700" fill="#dc2626">-</tspan> pomodoroRemainingSec : int <tspan fill="#64748b">[Pomodoro countdown timer]</tspan></text>
+      <text y="80"><tspan font-weight="700" fill="#dc2626">-</tspan> sessionBuffer : array&lt;CodingSessionChunk&gt;</text>
+      <text y="100"><tspan font-weight="700" fill="#16a34a">+</tspan> extensionVersion : string  |  <tspan font-weight="700" fill="#16a34a">+</tspan> syncCooldownSec : int</text>
+      <text y="120"><tspan font-weight="700" fill="#16a34a">+</tspan> activeProject : string  |  <tspan font-weight="700" fill="#16a34a">+</tspan> detectedLanguage : string</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="205" width="760" height="155" fill="#ffffff"/>
+    <line x1="0" y1="205" x2="760" y2="205" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 226)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> trackSession(file: string, lang: string, project: string) : void</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> startProblemTimer(slug: string) : void</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> stopProblemTimer(feltDifficulty: string) : ProblemTimeReport</text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> startPomodoro(durationMin: int) : void <tspan fill="#64748b">[Focus timer session]</tspan></text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> stopPomodoro() : void <tspan fill="#64748b">[Resets timer, flushes focus minutes]</tspan></text>
+      <text y="120"><tspan font-weight="700" fill="#16a34a">+</tspan> flushSessionBatches() : void <tspan fill="#64748b">[Rolls up into ActivityMetric]</tspan></text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 4: GitHubTracker (Mid-Left)                              -->
+  <!-- ============================================================== -->
+  <g transform="translate(60, 570)" filter="url(#cardShadow)">
+    <rect width="680" height="350" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="680" height="60" rx="10" fill="#334155"/>
+    <rect y="48" width="680" height="12" fill="#334155"/>
+    <text x="340" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#cbd5e1">&lt;&lt;Platform Ingestion Adapter&gt;&gt;</text>
+    <text x="340" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">GitHubTracker</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="680" height="145" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="680" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> username : string</text>
+      <text y="20"><tspan font-weight="700" fill="#16a34a">+</tspan> totalCommits : int</text>
+      <text y="40"><tspan font-weight="700" fill="#16a34a">+</tspan> activeRepositories : array&lt;GitHubRepo&gt;</text>
+      <text y="60"><tspan font-weight="700" fill="#16a34a">+</tspan> languageDistribution : map&lt;string, int&gt;</text>
+      <text y="80"><tspan font-weight="700" fill="#16a34a">+</tspan> pullRequestsCount : int  |  <tspan font-weight="700" fill="#16a34a">+</tspan> issuesResolved : int</text>
+      <text y="100"><tspan font-weight="700" fill="#16a34a">+</tspan> lastSyncedAt : string <tspan fill="#64748b">[ISO 8601 Timestamp]</tspan></text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> rateLimitRemaining : int</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="205" width="680" height="145" fill="#ffffff"/>
+    <line x1="0" y1="205" x2="680" y2="205" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 226)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> syncRepositories() : boolean</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> fetchCommitHistory(days: int) : array&lt;CommitEntry&gt;</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> getPrimaryLanguages() : array&lt;string&gt;</text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> getRepositoryPushedTimestamps() : map&lt;string, Date&gt;</text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> calculateRepoVelocity(repoName: string) : float</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> handleApiRateLimit(headers: object) : void</text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 5: LeetCodeTracker (Mid-Center)                          -->
+  <!-- ============================================================== -->
+  <g transform="translate(820, 570)" filter="url(#cardShadow)">
+    <rect width="680" height="350" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="680" height="60" rx="10" fill="#ea580c"/>
+    <rect y="48" width="680" height="12" fill="#ea580c"/>
+    <text x="340" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#ffedd5">&lt;&lt;Platform Ingestion Adapter&gt;&gt;</text>
+    <text x="340" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">LeetCodeTracker</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="680" height="145" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="680" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> username : string</text>
+      <text y="20"><tspan font-weight="700" fill="#16a34a">+</tspan> easyCount : int  |  <tspan font-weight="700" fill="#16a34a">+</tspan> mediumCount : int  |  <tspan font-weight="700" fill="#16a34a">+</tspan> hardCount : int</text>
+      <text y="40"><tspan font-weight="700" fill="#16a34a">+</tspan> topicCounts : map&lt;string, int&gt; <tspan fill="#64748b">[DP, Graph, Trees..]</tspan></text>
+      <text y="60"><tspan font-weight="700" fill="#16a34a">+</tspan> solvedProblemSlugs : set&lt;string&gt;</text>
+      <text y="80"><tspan font-weight="700" fill="#16a34a">+</tspan> struggledProblemSlugs : set&lt;string&gt;</text>
+      <text y="100"><tspan font-weight="700" fill="#16a34a">+</tspan> lastSyncedAt : string <tspan fill="#64748b">[ISO 8601 Timestamp]</tspan></text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> submissionCalendarJson : string</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="205" width="680" height="145" fill="#ffffff"/>
+    <line x1="0" y1="205" x2="680" y2="205" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 226)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> syncSolvedProblems() : boolean</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> getTopicDeficits() : map&lt;string, float&gt;</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> recordStruggledProblem(slug: string, tag: string) : void</text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> getSolvedBreakdown() : DifficultyStats</text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> fetchRecentSubmissions(limit: int) : array&lt;Submission&gt;</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> executeGraphQLQuery(query: string) : object</text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 6: SpacedRepetitionQueue (Mid-Right)                     -->
+  <!-- ============================================================== -->
+  <g transform="translate(1580, 570)" filter="url(#cardShadow)">
+    <rect width="760" height="350" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="760" height="60" rx="10" fill="#059669"/>
+    <rect y="48" width="760" height="12" fill="#059669"/>
+    <text x="380" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#a7f3d0">&lt;&lt;Retention &amp; Review Scheduler&gt;&gt;</text>
+    <text x="380" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">SpacedRepetitionQueue</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="760" height="145" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="760" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#dc2626">-</tspan> intervals : int[] <tspan fill="#64748b">[Standard: 3, 7, 21, 30 days]</tspan></text>
+      <text y="20"><tspan font-weight="700" fill="#dc2626">-</tspan> resetIntervalOnFail : int <tspan fill="#64748b">[Reset: 3 days on fail]</tspan></text>
+      <text y="40"><tspan font-weight="700" fill="#16a34a">+</tspan> dueReviews : array&lt;ReviewItem&gt;</text>
+      <text y="60"><tspan font-weight="700" fill="#16a34a">+</tspan> upcomingReviews : array&lt;ReviewItem&gt;</text>
+      <text y="80"><tspan font-weight="700" fill="#16a34a">+</tspan> totalReviewedCount : int  |  <tspan font-weight="700" fill="#16a34a">+</tspan> retentionRate : float</text>
+      <text y="100"><tspan font-weight="700" fill="#dc2626">-</tspan> struggleThresholdSec : int <tspan fill="#64748b">[&gt; 2400 sec = Struggled]</tspan></text>
+      <text y="120"><tspan font-weight="700" fill="#16a34a">+</tspan> maxDailyReviewLimit : int</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="205" width="760" height="145" fill="#ffffff"/>
+    <line x1="0" y1="205" x2="760" y2="205" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 226)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> scheduleReview(slug: string, struggled: boolean) : string</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> completeReview(reviewId: string, passed: boolean) : int</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> fetchDueToday() : array&lt;ReviewItem&gt;</text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> getUpcomingPipeline(windowDays: int) : array&lt;ReviewItem&gt;</text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> calculateNextInterval(currInterval: int, passed: boolean) : int</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> pruneStaleReviews(retentionWindowDays: int) : void</text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 7: WeaknessDiagnosticEngine (Bottom-Left)                -->
+  <!-- ============================================================== -->
+  <g transform="translate(60, 980)" filter="url(#cardShadow)">
+    <rect width="680" height="380" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="680" height="60" rx="10" fill="#6d28d9"/>
+    <rect y="48" width="680" height="12" fill="#6d28d9"/>
+    <text x="340" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#ddd6fe">&lt;&lt;Algorithmic Diagnostic Engine&gt;&gt;</text>
+    <text x="340" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">WeaknessDiagnosticEngine</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="680" height="160" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="680" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#dc2626">-</tspan> volumeWeight : float <tspan fill="#64748b">[Weight = 0.40]</tspan></text>
+      <text y="20"><tspan font-weight="700" fill="#dc2626">-</tspan> advancedRatioWeight : float <tspan fill="#64748b">[Weight = 0.35 (Med+Hard)/Total]</tspan></text>
+      <text y="40"><tspan font-weight="700" fill="#dc2626">-</tspan> strugglePenalty : float <tspan fill="#64748b">[Weight = 0.25]</tspan></text>
+      <text y="60"><tspan font-weight="700" fill="#dc2626">-</tspan> topicThresholds : map&lt;string, int&gt; <tspan fill="#64748b">[Benchmark topic volumes]</tspan></text>
+      <text y="80"><tspan font-weight="700" fill="#16a34a">+</tspan> balanceToleranceDrift : float <tspan fill="#64748b">[0.25 (25% drift)]</tspan></text>
+      <text y="100"><tspan font-weight="700" fill="#16a34a">+</tspan> minimumBaselineSolves : int</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> diagnosticHistoryCache : map&lt;string, WeaknessResult&gt;</text>
+      <text y="140"><tspan font-weight="700" fill="#16a34a">+</tspan> readinessThresholds : map&lt;string, int&gt;</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="220" width="680" height="160" fill="#ffffff"/>
+    <line x1="0" y1="220" x2="680" y2="220" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 242)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> analyzeWeaknesses(topics: map&lt;string, int&gt;) : WeaknessResult</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> detectBalance(history: array&lt;ActivityEntry&gt;) : BalanceStatus</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> computeInterviewReadiness() : ReadinessScore</text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> mapSkillGaps(targetRole: string) : array&lt;SkillGap&gt;</text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> identifyStruggledPatterns() : array&lt;string&gt;</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> calculateDepthRatio(medium: int, hard: int, total: int) : float</text>
+      <text y="144"><tspan font-weight="700" fill="#dc2626">-</tspan> evaluateTopicDeficitSeverity(count: int, expected: int) : float</text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 8: AIDailyPlanner (Bottom-Center)                        -->
+  <!-- ============================================================== -->
+  <g transform="translate(820, 980)" filter="url(#cardShadow)">
+    <rect width="680" height="380" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="680" height="60" rx="10" fill="#4338ca"/>
+    <rect y="48" width="680" height="12" fill="#4338ca"/>
+    <text x="340" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#c7d2fe">&lt;&lt;Intelligent Action Planner&gt;&gt;</text>
+    <text x="340" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">AIDailyPlanner</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="680" height="160" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="680" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#dc2626">-</tspan> cachedDate : string <tspan fill="#64748b">[Current plan date]</tspan></text>
+      <text y="20"><tspan font-weight="700" fill="#dc2626">-</tspan> taskLimit : int <tspan fill="#64748b">[Optimal daily tasks = 3..5]</tspan></text>
+      <text y="40"><tspan font-weight="700" fill="#16a34a">+</tspan> generatedPlanItems : array&lt;PlanTask&gt;</text>
+      <text y="60"><tspan font-weight="700" fill="#16a34a">+</tspan> followedStatus : array&lt;boolean&gt;</text>
+      <text y="80"><tspan font-weight="700" fill="#16a34a">+</tspan> completionRatio : float</text>
+      <text y="100"><tspan font-weight="700" fill="#dc2626">-</tspan> repoCommitAgeDays : map&lt;string, int&gt;</text>
+      <text y="120"><tspan font-weight="700" fill="#16a34a">+</tspan> userGoalTargets : map&lt;string, int&gt;</text>
+      <text y="140"><tspan font-weight="700" fill="#dc2626">-</tspan> planGenerationStrategy : string</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="220" width="680" height="160" fill="#ffffff"/>
+    <line x1="0" y1="220" x2="680" y2="220" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 242)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> generateDailyPlan(context: PlannerContext) : DailyPlan</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> toggleTask(taskIndex: int) : boolean</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> refreshPlan() : DailyPlan</text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> prioritizeDeficitTasks(deficits: array) : array&lt;PlanTask&gt;</text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> prioritizeStaleProjects(repos: array) : array&lt;PlanTask&gt;</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> assembleThreeTierPlan(reviews: array, weak: array) : DailyPlan</text>
+      <text y="144"><tspan font-weight="700" fill="#dc2626">-</tspan> cacheDailyPlan(userId: string, plan: DailyPlan) : void</text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CLASS 9: LinkedInDraftGenerator (Bottom-Right)                 -->
+  <!-- ============================================================== -->
+  <g transform="translate(1580, 980)" filter="url(#cardShadow)">
+    <rect width="760" height="380" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    
+    <!-- Compartment 1: Header -->
+    <rect width="760" height="60" rx="10" fill="#0284c7"/>
+    <rect y="48" width="760" height="12" fill="#0284c7"/>
+    <text x="380" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#bae6fd">&lt;&lt;Anti-Fabrication Post Synthesizer&gt;&gt;</text>
+    <text x="380" y="47" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">LinkedInDraftGenerator</text>
+
+    <!-- Compartment 2: Attributes -->
+    <rect y="60" width="760" height="160" fill="#f8fafc"/>
+    <line x1="0" y1="60" x2="760" y2="60" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 80)" font-family="ui-monospace, monospace" font-size="13" fill="#1e293b">
+      <text y="0"><tspan font-weight="700" fill="#dc2626">-</tspan> supportedPostTypes : string[] <tspan fill="#64748b">['weekly_recap', 'project_milestone']</tspan></text>
+      <text y="20"><tspan font-weight="700" fill="#dc2626">-</tspan> verifiedMetrics : map&lt;string, object&gt; <tspan fill="#64748b">[Anti-fabrication proof]</tspan></text>
+      <text y="40"><tspan font-weight="700" fill="#16a34a">+</tspan> generatedPostHistory : array&lt;DraftPost&gt;</text>
+      <text y="60"><tspan font-weight="700" fill="#16a34a">+</tspan> antiFabricationEnforced : boolean <tspan fill="#64748b">[Strict real metrics only]</tspan></text>
+      <text y="80"><tspan font-weight="700" fill="#16a34a">+</tspan> characterCountLimit : int <tspan fill="#64748b">[LinkedIn optimal 1300..3000]</tspan></text>
+      <text y="100"><tspan font-weight="700" fill="#dc2626">-</tspan> promptTemplateEngine : string</text>
+      <text y="120"><tspan font-weight="700" fill="#16a34a">+</tspan> activeDraftId : string</text>
+      <text y="140"><tspan font-weight="700" fill="#dc2626">-</tspan> postApprovalStatus : map&lt;string, boolean&gt;</text>
+    </g>
+
+    <!-- Compartment 3: Operations -->
+    <rect y="220" width="760" height="160" fill="#ffffff"/>
+    <line x1="0" y1="220" x2="760" y2="220" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(20, 242)" font-family="ui-monospace, monospace" font-size="13" fill="#0f172a">
+      <text y="0"><tspan font-weight="700" fill="#16a34a">+</tspan> generateWeeklyPost(stats: WeeklyAggregatedStats) : string</text>
+      <text y="24"><tspan font-weight="700" fill="#16a34a">+</tspan> generateProjectPost(repoStats: RepositoryStats) : string</text>
+      <text y="48"><tspan font-weight="700" fill="#16a34a">+</tspan> generateProfileChecklist(user: UserProfile) : ChecklistReport</text>
+      <text y="72"><tspan font-weight="700" fill="#16a34a">+</tspan> markAsPosted(draftId: string) : boolean</text>
+      <text y="96"><tspan font-weight="700" fill="#16a34a">+</tspan> copyToClipboard(draftId: string) : boolean</text>
+      <text y="120"><tspan font-weight="700" fill="#dc2626">-</tspan> validateAntiFabricationIntegrity(stats: object) : boolean</text>
+      <text y="144"><tspan font-weight="700" fill="#dc2626">-</tspan> formatBulletSummary(metrics: map) : string</text>
+    </g>
+  </g>
+
+  <!-- Presentation Footer Info -->
+  <g transform="translate(60, 1395)">
+    <rect width="2280" height="35" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+    <text x="25" y="22" font-size="12" font-weight="700" fill="#475569">UML 2.5 Specification Standard: All 9 classes feature standard 3-compartment structure [Name | Typed Attributes (+/-) | Typed Operations (+/-)] • Complete Association Multiplicities</text>
+    <text x="2255" y="22" text-anchor="end" font-size="12" font-weight="600" fill="#64748b">DevProfile Architecture • Academic Submission</text>
+  </g>
+</svg>
